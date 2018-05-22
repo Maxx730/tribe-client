@@ -5,14 +5,10 @@ export default class LoginFrame extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.LoginHead}>
+        <View style={styles.LoginHead}>
             
-        </Text>
-        <View>
-            <Text style={styles.LoginTitle}>
-                Login or Sign Up
-            </Text>
         </View>
+
         <View style={styles.LoginForm}>
             <View style={{paddingTop:7,paddingBottom:7}}>
                 <TextInput underlineColorAndroid='transparent' style={styles.InputField} placeholder="Username">
@@ -32,6 +28,12 @@ export default class LoginFrame extends React.Component {
                 </TouchableHighlight>
             </View>
         </View>
+
+        <View style={styles.LoginWith}>
+          <Text>
+            Or Log In With
+          </Text>
+        </View>
       </View>
     );
   }
@@ -40,19 +42,17 @@ export default class LoginFrame extends React.Component {
 const styles = StyleSheet.create({
   container: {
     marginTop:50,
-    borderRadius:3,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowRadius: 5,
-    shadowOpacity: 1.0,
-    elevation:1,
-    backgroundColor:"#FFF"
+    backgroundColor:"#FCFCFC",
+    borderRadius:2,
+    borderWidth:.5,
+    borderColor:"#EBEBEB"
   },
   LoginHead:{
-
+    height:45,
+    borderTopRightRadius:2,
+    borderTopLeftRadius:2,
+    borderColor:"#EBEBEB",
+    borderBottomWidth:.5
   },
   LoginTitle:{
     paddingLeft:20,
@@ -67,29 +67,38 @@ const styles = StyleSheet.create({
     padding:10,
     flex:1,
     backgroundColor:"#f8aa23",
-    borderRadius:3,
+    borderRadius:2,
     marginRight:5,
     borderStyle:'solid',
-    borderWidth:1,
+    borderWidth:.5,
     borderColor:"#cf8e1c"
   },
   SignUpButton:{
     padding:10,
     flex:1,
     backgroundColor:"#f8aa23",
-    borderRadius:3,
+    borderRadius:2,
     borderStyle:'solid',
-    borderWidth:1,
+    borderWidth:.5,
     borderColor:"#cf8e1c"
   },
   InputField:{
     backgroundColor:"#f3f3f3",
     padding:10,
     paddingLeft:50,
-    borderRadius:3,
+    borderRadius:2,
     borderColor:"#dcdcdc",
-    borderWidth:1,
+    borderWidth:.5,
     borderStyle:"solid",
     marginTop:7
+  },
+  LoginWith:{
+    backgroundColor:"#FCFCFC",
+    borderBottomRightRadius:2,
+    borderBottomLeftRadius:2,
+    padding:10,
+    borderTopWidth:.5,
+    borderTopColor:"#dcdcdc",
+    paddingLeft:15
   }
 });
