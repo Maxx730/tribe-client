@@ -36,7 +36,7 @@ export default class SignUpFrame extends React.Component{
                 </View>
                 <View style={styles.BottomButtons}>
                     <TouchableHighlight style={styles.BottomButton} onPress={() => {}}>
-                            <Text>Sign Me Up!</Text>
+                        <Image style={styles.ButtonIcon} source={require('../assets/icons/arrow-right-icon.png')}/>
                     </TouchableHighlight>
                 </View>
             </View>

@@ -2,12 +2,33 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image} from 'react-native';
 
 export default class ProfileView extends React.Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            user:{}
+        }
+    }
+
+    componentDidMount(){
+        this.setState({
+            user:this.props.user,
+            focusedList:"tribes"
+        });
+    }
+
+    ToggleList(list){
+        this.setState({
+            focusedList:list
+        })
+    }
+
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.ProfileHead}>
-                    <Text>[UserName]</Text>
-                    <Text>[Firstname Lastname]</Text>
+                    <Text>{this.state.user.username}</Text>
+                    <Text style={styles.FullName}>{this.state.user.firstname} {this.state.user.lastname}</Text>
                 </View>
                 <View style={styles.ProfileCounters}>
                     <View style={{flexDirection:'row'}}>
@@ -65,5 +86,12 @@ const styles = StyleSheet.create({
         width:24,
         height:24,
         opacity:.1
+    },
+    FullName:{
+        fontSize:8,
+        padding:5,
+        backgroundColor:"red",
+        alignSelf: 'flex-start',
+        borderRadius:5
     }
 });

@@ -6,10 +6,10 @@ export default class SingleTribe extends React.Component{
         return(
             <View style={styles.container}>
                 <View style={styles.TribeTitle}>
-                    <Text>[Tribe Title]</Text>
+                    <Text>{this.props.tribe.title}</Text>
                 </View>
                 <View style={styles.TribeDescription}>
-                    <Text>[Tribe Description]</Text>
+                    <Text>{this.props.tribe.description}</Text>
                 </View>
                 <View style={styles.TribeButtons}>
                 <TouchableHighlight style={styles.TribeButton} onPress={() => {console.log('working')}}>
@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
         backgroundColor:"#FCFCFC",
         borderRadius:2,
         borderWidth:.5,
-        borderColor:"#EBEBEB"
+        borderColor:"#EBEBEB",
+        marginTop:7
     },
     TribeTitle:{
         padding:7,

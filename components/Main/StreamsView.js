@@ -27,8 +27,6 @@ export default class StreamsView extends React.Component{
         this.setState(previousState =>{
             return{focusedView:view}
         });
-
-        console.log(this.state)
     }
 
     render(){
@@ -39,10 +37,10 @@ export default class StreamsView extends React.Component{
                 StreamView = <EventStream/>
             break;
             case "tribes":
-                StreamView = <TribesStream/>
+                StreamView = <TribesStream user={this.props.user}/>
             break;
             case "profile":
-                StreamView = <ProfileView/>
+                StreamView = <ProfileView user={this.props.user}/>
             break;
         }
 

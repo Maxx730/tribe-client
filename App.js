@@ -11,13 +11,26 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      focusedView:"signup"
+      focusedView:"streams",
+      hasLoaded:false
     }
   }
 
   ToggleView(view){
     this.setState({
-      focusedView:view
+      focusedView:view,
+      user:{}
+    });
+  }
+
+  componentDidMount(){
+    fetch('http://squidswap.com:4000/user/TomBigDickBomb').then(response =>{
+      return response.json();
+    }).then(data => {
+      this.setState({
+        user:data[0],
+        hasLoaded:true
+      });
     });
   }
 
@@ -38,11 +51,19 @@ export default class App extends React.Component {
         );
       break;
       case "streams":
-        return (
-          <View style={styles.container}>
-            <StreamsView/>
-          </View>
-        );
+        if(this.state.hasLoaded){
+          return (
+            <View style={styles.container}>
+              <StreamsView user={this.state.user}/>
+            </View>
+          );
+        }else{
+          return (
+            <View style={styles.container}>
+              <Text>Loading...</Text>
+            </View>
+          );
+        }
       break;
     }
   }
