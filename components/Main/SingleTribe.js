@@ -9,20 +9,29 @@ export default class SingleTribe extends React.Component{
                     <Text>{this.props.tribe.title}</Text>
                 </View>
                 <View style={styles.TribeDescription}>
-                    <Text>{this.props.tribe.description}</Text>
+                    <View style={{borerBottomWidth:.5,borderBottomColor:"#000000",marginBottom:5}}>
+                        <Text style={styles.DescTitle}>Description</Text>
+                    </View>
+                    <Text style={{fontSize:8}}>{this.props.tribe.description}</Text>
                 </View>
                 <View style={styles.TribeButtons}>
-                <TouchableHighlight style={styles.TribeButton} onPress={() => {console.log('working')}}>
-                        <Image style={styles.TribeButtonImage} source={require('../../assets/icons/tribes-icon.png')}/>
-                    </TouchableHighlight>
                     <TouchableHighlight style={styles.TribeButton} onPress={() => {console.log('working')}}>
-                        <Text>Button 2</Text>
+                        <View>
+                            <Text style={styles.CountText}>
+                                {this.props.tribe.members.length}
+                            </Text>
+                            <Image style={styles.TribeButtonImage} source={require('../../assets/icons/tribes-icon.png')}/>
+                        </View>
+                    </TouchableHighlight>
+                    <TouchableHighlight style={[styles.TribeButton,styles.ButtonRight]} onPress={() => {console.log('working')}}>
+                        <Image style={styles.TribeButtonImage} source={require('../../assets/icons/arrow-right-icon.png')}/>
                     </TouchableHighlight>
                 </View>
             </View>
         );
     }
 }
+
 
 const styles = StyleSheet.create({
     container:{
@@ -54,6 +63,20 @@ const styles = StyleSheet.create({
         opacity:.1
     },
     TribeDescription:{
-        padding:7
+        padding:7,
+        minHeight:100,
+    },
+    ButtonRight:{
+        borderLeftWidth:.5,
+        borderLeftColor:"#EBEBEB"
+    },
+    DescTitle:{
+        fontSize:9,
+        fontWeight:"bold"
+    },
+    CountText:{
+        bottom:3,
+        left:-16,
+        position:"absolute"
     }
 });

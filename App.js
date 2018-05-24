@@ -24,7 +24,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount(){
-    fetch('http://squidswap.com:4000/user/TomBigDickBomb').then(response =>{
+    fetch('http://squidswap.com:4000/user/Molx730').then(response =>{
       return response.json();
     }).then(data => {
       this.setState({
@@ -33,6 +33,7 @@ export default class App extends React.Component {
       });
     });
   }
+
 
   render() {
     switch(this.state.focusedView){
@@ -74,7 +75,6 @@ const styles = StyleSheet.create({
     paddingLeft:10,
     paddingRight:10,
     backgroundColor:"#f3f3f3",
-    paddingBottom:100,
     flex:1
   },
 });
