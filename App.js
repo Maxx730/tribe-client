@@ -43,53 +43,53 @@ export default class App extends React.Component {
   }
 
   render() {
-    switch(this.state.focusedView){
-      case "login":
-        return (
-          <View style={styles.container}>
-            <LoginFrame toggle={this.ToggleView.bind(this)}/>
-          </View>
-        );
-      break;
-      case "signup":
-        return (
-          <View style={styles.container}>
-            <SignUpFrame/>
-          </View>
-        );
-      break;
-
-      case "addtribe":
-      return (
-        <View style={styles.container}>
-          <AddTribe back={this.ToggleView.bind(this)}/>
-        </View>
-      );
-      break;
-
-      case "addevent":
-      return (
-        <View style={styles.container}>
-          <AddEvent back={this.ToggleView.bind(this)}/>
-        </View>
-      );
-      break;
-
-      case "streams":
-        if(this.state.hasLoaded){
+    if(this.state.hasLoaded){
+      switch(this.state.focusedView){
+        case "login":
           return (
             <View style={styles.container}>
-              <StreamsView main={this.ToggleView.bind(this)} user={this.state.user}/>
+              <LoginFrame toggle={this.ToggleView.bind(this)}/>
             </View>
           );
-        }else{
+        break;
+        case "signup":
           return (
             <View style={styles.container}>
-              <Text>Loading...</Text>
+              <SignUpFrame/>
             </View>
           );
-        }
-      break;
+        break;
+  
+        case "addtribe":
+        return (
+          <View style={styles.container}>
+            <AddTribe back={this.ToggleView.bind(this)}/>
+          </View>
+        );
+        break;
+  
+        case "addevent":
+        return (
+          <View style={styles.container}>
+            <AddEvent back={this.ToggleView.bind(this)} user={this.state.user}/>
+          </View>
+        );
+        break;
+  
+        case "streams":
+            return (
+              <View style={styles.container}>
+                <StreamsView main={this.ToggleView.bind(this)} user={this.state.user}/>
+              </View>
+            );
+        break;
+      }
+    }else{
+      return (
+        <View style={styles.container}>
+          <Text>Loading...</Text>
+        </View>
+      );
     }
   }
 }
