@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage} from 'react-native';
 
 import StreamToggler from './StreamToggler'
 import GlobalAddButton from './GlobalAddButton'
@@ -14,14 +14,14 @@ export default class StreamsView extends React.Component{
         super(props);
 
         this.state = {
-            focusedView:'tribes'
+            focusedView:'tribes',
+            focusedTribe:{},
+            username: null
         }
     }
 
     componentDidMount(){
-        this.setState(previousState =>{
-            return{focusedView:'details'}
-        });
+       
     }
 
     ToggleView(view){
@@ -30,21 +30,31 @@ export default class StreamsView extends React.Component{
         });
     }
 
+    OpenTribeDetails(tribe){
+        this.setState({
+            focusedView:'details',
+            focusedTribe:tribe
+        });
+    }
+
     render(){
         let StreamView = "";
+        let flexVal = 3;
 
         switch(this.state.focusedView){
             case "events":
                 StreamView = <EventStream/>
             break;
             case "tribes":
-                StreamView = <TribesStream user={this.props.user}/>
+                StreamView = <TribesStream toggle={this.OpenTribeDetails.bind(this)} user={this.props.user}/>
             break;
             case "profile":
                 StreamView = <ProfileView user={this.props.user}/>
+                flexVal = 5;
             break;
             case "details":
-                StreamView = <TribeDetails user={this.props.user}/>
+                flexVal = 4.6;
+                StreamView = <TribeDetails toggle={this.ToggleView.bind(this)} tribe={this.state.focusedTribe} user={this.props.user}/>
             break;
         }
 
@@ -53,9 +63,10 @@ export default class StreamsView extends React.Component{
                 <View style={{flex:1}}>
                     <GlobalSearch/>
                     <StreamToggler toggle={this.ToggleView.bind(this)}/>
-                    <GlobalAddButton/>
+                    {this.state.focusedView === 'events' && <GlobalAddButton toggle={this.props.main.bind(this)}/>}
+                    {this.state.focusedView === 'tribes' && <GlobalAddButton type='tribes' toggle={this.props.main.bind(this)}/>}
                 </View>
-                <View style={{flex:2.6,alignSelf:'stretch'}}>
+                <View style={{flex:flexVal,alignSelf:'stretch'}}>
                     {StreamView}
                 </View>
             </View>

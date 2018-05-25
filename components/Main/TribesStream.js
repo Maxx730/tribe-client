@@ -30,7 +30,7 @@ export default class TribesStream extends React.Component{
             <View style={styles.container}>
                 <ScrollView>
                     {this.state.tribes.map(tribe => {
-                        return <SingleTribe key={tribe._id} tribe={tribe}/>
+                        return <SingleTribe toggle={this.props.toggle} key={tribe._id} tribe={tribe}/>
                     })}
                 </ScrollView>
             </View>

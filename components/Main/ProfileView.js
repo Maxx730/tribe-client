@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    
     ButtonImage:{
         width:24,
         height:24,
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
         height:100,
         borderTopLeftRadius:2
     },
-    
+
     EditButton:{
         padding:7,
         borderTopRightRadius:2,

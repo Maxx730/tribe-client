@@ -5,7 +5,7 @@ export default class GlobalAddButton extends React.Component{
     render(){
         return(
             <View style={styles.container}>
-                <TouchableHighlight style={styles.HighlightButton} onPress={() => {console.log("testing")}}>
+                <TouchableHighlight style={styles.HighlightButton} onPress={this.props.type === 'tribes' && this.props.toggle.bind(this,'addtribe')}>
                     <Image style={{width:24,height:24,opacity:.1}} source={require('../../assets/icons/square-add.png')}/>
                 </TouchableHighlight>
             </View>

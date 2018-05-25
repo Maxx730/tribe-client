@@ -5,35 +5,54 @@ export default class TribeDetails extends React.Component{
     constructor(props){
         super(props);
 
+        this.state = {
+            focusedDetailView:'descrip',
+            tribe:{}
+        }
     }
 
     componentDidMount(){
+        this.setState({
+            tribe:this.props.tribe
+        })
+    }
 
+    ToggleDetailView(view){
+        this.setState({
+            focusedDetailView:view
+        });
     }
 
     render(){
         return(
-            <View style={styles.container}>
-                <View style={styles.TribeBanner}>
-                    <View style={styles.TitleContainer}>
-                        <Text>[Tribe Title]</Text>
-                    </View>
+            <View>
+                <View style={[styles.container,{marginBottom:7}]}>
+                        <TouchableHighlight style={[styles.TribeButton,{padding:20}]} onPress={() => {
+                            console.log("working")
+                        }}> 
+                            <Text>Back to Tribes</Text>
+                        </TouchableHighlight>
+                </View>
+                <View style={styles.container}>
+                    <View style={styles.TribeBanner}>
+                        <View style={styles.TitleContainer}>
+                            <Text>{this.state.tribe.title}</Text>
+                        </View>
 
-                    <Image style={{width:100,height:100}} source={require('../../assets/defaults/default-placeholder.png')}/>
-                </View>
-                <View style={styles.TabHolder}>
-                    <TouchableHighlight style={[styles.TribeButton]} onPress={() => {console.log('working')}}>
-                        <Image style={styles.TribeButtonImage} source={require('../../assets/icons/arrow-right-icon.png')}/>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={[styles.TribeButton,styles.CenterButton]} onPress={() => {console.log('working')}}>
-                        <Image style={styles.TribeButtonImage} source={require('../../assets/icons/tribes-icon.png')}/>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={[styles.TribeButton]} onPress={() => {console.log('working')}}>
-                        <Image style={styles.TribeButtonImage} source={require('../../assets/icons/calendar-icon.png')}/>
-                    </TouchableHighlight>
-                </View>
-                <View style={styles.TribeDescription}>
-                    <Text style={{fontSize:8}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+                        <Image style={{width:100,height:100}} source={require('../../assets/defaults/default-placeholder.png')}/>
+                    </View>
+                    <View style={styles.TabHolder}>
+                        <TouchableHighlight style={[styles.TribeButton]} onPress={this.ToggleDetailView.bind(this,'descrip')}>
+                            <Image style={styles.TribeButtonImage} source={require('../../assets/icons/descrip-icon.png')}/>
+                        </TouchableHighlight>
+                        <TouchableHighlight style={[styles.TribeButton,styles.CenterButton]} onPress={this.ToggleDetailView.bind(this,'members')}>
+                            <Image style={styles.TribeButtonImage} source={require('../../assets/icons/tribes-icon.png')}/>
+                        </TouchableHighlight>
+                        <TouchableHighlight style={[styles.TribeButton]} onPress={this.ToggleDetailView.bind(this,'events')}>
+                            <Image style={styles.TribeButtonImage} source={require('../../assets/icons/calendar-icon.png')}/>
+                        </TouchableHighlight>
+                    </View>
+                    {this.state.focusedDetailView === 'descrip' && <View style={styles.TribeDescription}><Text style={{fontSize:8}}>{this.state.tribe.description}</Text></View>}
                 </View>
             </View>
         );
@@ -63,7 +82,8 @@ const styles = StyleSheet.create({
         position:'absolute',
         top:0,
         left:0,
-        padding:7
+        padding:7,
+        borderTopLeftRadius:2
     },
     TribeButtonImage:{
         width:24,

@@ -1,7 +1,43 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image, AsyncStorage} from 'react-native';
+import * as Keychain from 'react-native-keychain'
 
 export default class LoginFrame extends React.Component {
+
+  //Sends a POST request to the backend and checks the users credentials.
+  RequestSignIn(){
+      fetch('http://squidswap.com:4000/user/login', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: 'Molx730',
+          password: 'remote12',
+        }),
+      }).then(result => {
+        return result.json();
+      }).then(data => {
+        if(data.message == "LOGIN SUCCESS"){
+          //HERE WE ARE GOING TO HAVE TO SAVE THE USERS CREDENTIALS.
+          try {
+            AsyncStorage.setItem('@TribeStore:username', 'Molx730');
+          } catch (error) {
+            // Error saving data
+          }
+
+          try{
+            AsyncStorage.getItem('@TribeStore:username').then(value => {
+              this.props.toggle('streams')
+            });
+          }catch(err){
+            console.log("ERROR RETRIEVING DATA FROM ASYNC STORAGE")
+          }
+        }
+      });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -20,7 +56,7 @@ export default class LoginFrame extends React.Component {
             </View>
 
             <View style={{flexDirection:'row'}}>
-                <TouchableHighlight style={styles.LoginButton} onPress={() => {console.log("working")}}>
+                <TouchableHighlight style={styles.LoginButton} onPress={this.RequestSignIn.bind(this)}>
                     <Text style={{textAlign:'center',color:"#FFF"}}>Login</Text>
                 </TouchableHighlight>
                 <TouchableHighlight style={styles.SignUpButton} onPress={() => {console.log("working")}}>
