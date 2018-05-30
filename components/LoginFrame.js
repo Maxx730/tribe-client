@@ -22,13 +22,13 @@ export default class LoginFrame extends React.Component {
         if(data.message == "LOGIN SUCCESS"){
           //HERE WE ARE GOING TO HAVE TO SAVE THE USERS CREDENTIALS.
           try {
-            AsyncStorage.setItem('@TribeStore:username', 'Molx730');
+            AsyncStorage.setItem('@TribeStore:userId', '5af5b25deda5ff097ffa299e');
           } catch (error) {
             // Error saving data
           }
 
           try{
-            AsyncStorage.getItem('@TribeStore:username').then(value => {
+            AsyncStorage.getItem('@TribeStore:userId').then(value => {
               this.props.toggle('streams')
             });
           }catch(err){

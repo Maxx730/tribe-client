@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, Image, Switch, TextInput, DatePickerIOS} from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, Image, Switch, TextInput, DatePickerIOS, ScrollView} from 'react-native';
+import DatePicker  from 'react-native-datepicker'
 
 export default class AddEvent extends React.Component{
     constructor(props){
@@ -8,7 +9,9 @@ export default class AddEvent extends React.Component{
         this.state = {
             user:{},
             hasLoaded:false,
-            tribes:[]
+            tribes:[],
+            startDate:null,
+            endDate:null
         }
     }
 
@@ -27,41 +30,91 @@ export default class AddEvent extends React.Component{
     render(){
         if(this.state.hasLoaded){
             return(
-                <View>
-                    <View style={[styles.container,{marginTop:30,alignSelf: 'flex-start',}]}>
-                        <TouchableHighlight style={styles.ButtonLeft} onPress={this.props.back.bind(this,'streams')}>
-                            <Image style={styles.ButtonImage} source={require('../../assets/icons/close-icon.png')}/>
-                        </TouchableHighlight>
+                <ScrollView>
+                    <View>
+                        <View style={[styles.container,{marginTop:30,alignSelf: 'flex-start',}]}>
+                            <TouchableHighlight style={styles.ButtonLeft} onPress={this.props.back.bind(this,'streams')}>
+                                <Image style={styles.ButtonImage} source={require('../../assets/icons/close-icon.png')}/>
+                            </TouchableHighlight>
+                        </View>
+                        <View style={styles.container}>
+                            <View style={styles.AddEventTitle}>
+                                <Text>Add Event</Text>
+                            </View>
+                            <View style={{padding:10}}>
+                                <TextInput underlineColorAndroid='transparent' style={styles.InputField} placeholder="Event Title">
+                                
+                                </TextInput>
+                                <TextInput underlineColorAndroid='transparent' style={[styles.InputField,{height:100}]} multiline={true}>
+                                
+                                </TextInput>
+                            </View>
+                            <View style={{flexDirection:'row',}}>
+                            <DatePicker
+                                style={{flex:1}}
+                                date={this.state.startDate}
+                                mode="date"
+                                placeholder="Select Start Date"
+                                format="YYYY-MM-DD"
+                                confirmBtnText="Confirm"
+                                cancelBtnText="Cancel"
+                                customStyles={{
+                                dateIcon: {
+                                    display:'none'
+                                },
+                                dateInput: {
+                                    backgroundColor:"#FCFCFC",
+                                    borderWidth:.5,
+                                    borderColor:"#EBEBEB"
+                                }
+                                }}
+
+                                onDateChange={(date) => {this.setState({startDate: date})}}
+                            />
+                            <DatePicker
+
+                                style={{flex:1}}
+                                date={this.state.endDate}
+                                mode="date"
+                                placeholder="Select End Date"
+                                format="YYYY-MM-DD"
+                                confirmBtnText="Confirm"
+                                cancelBtnText="Cancel"
+                                customStyles={{
+                                dateIcon: {
+                                    display:'none'
+                                },
+                                dateInput: {
+                                    backgroundColor:"#FCFCFC",
+                                    borderWidth:.5,
+                                    borderColor:"#EBEBEB"
+                                }
+                                }}
+                                onDateChange={(date) => {this.setState({endDate: date})}}
+                            />
+                            </View>
+                            <View>
+                                <View style={styles.AddTribesTitle}>
+                                    <Text>Select Tribes to Include</Text>
+                                </View>
+                                {this.state.tribes.map(tribe => {
+                                    return (
+                                        <TouchableHighlight style={styles.SingleTribeTicker} onPress={() => {console.log('working')}}>
+                                            <View style={{flexDirection:'row'}}>
+                                                <View style={{flex:12}}>
+                                                    <Text style={{padding:7}}>{tribe.title}</Text>
+                                                </View>
+                                                <View style={{flex:1,borderLeftColor:"#EBEBEB",borderLeftWidth:.5,padding:7}}>
+                                                    <Image style={{width:16,height:16,opacity:.1}} source={require('../../assets/icons/x-circle.png')}/>
+                                                </View>
+                                            </View>
+                                        </TouchableHighlight>
+                                    );
+                                })}
+                            </View>
+                        </View>
                     </View>
-                    <View style={styles.container}>
-                        <View style={styles.AddEventTitle}>
-                            <Text>Add Event</Text>
-                        </View>
-                        <View style={{padding:10}}>
-                            <TextInput underlineColorAndroid='transparent' style={styles.InputField} placeholder="Event Title">
-                            
-                            </TextInput>
-                            <TextInput underlineColorAndroid='transparent' style={[styles.InputField,{height:100}]} multiline={true}>
-                            
-                            </TextInput>
-                        </View>
-                        <View style={{flexDirection:'row'}}>
-                            <DatePickerIOS style={{ transform: [{ scaleX: .8 }, { scaleY: .8 }],flex:1}} mode="date" date={new Date()}/>
-                            <DatePickerIOS style={{ transform: [{ scaleX: .8 }, { scaleY: .8 }],flex:1}} mode="time" date={new Date()}/>
-                        </View>
-                        <View>
-                            <Text>Select Tribes to Include</Text>
-                            {this.state.tribes.map(tribe => {
-                                return (
-                                    <View key={tribe._id} style={styles.SingleTribeTicker}>
-                                        <Switch ref={tribe._id} style={styles.TribeSwitch} value = {true}/>
-                                        <Text>{tribe.title}</Text>
-                                    </View>
-                                );
-                            })}
-                        </View>
-                    </View>
-                </View>
+                </ScrollView>
             );
         }else{
             return(
@@ -89,8 +142,7 @@ const styles = StyleSheet.create({
     SingleTribeTicker:{
         position:"relative",
         borderBottomWidth:.5,
-        borderBottomColor:"#EBEBEB",
-        padding:10
+        borderBottomColor:"#EBEBEB"
     },
     TribeSwitch:{
         position:"absolute",
@@ -110,5 +162,10 @@ const styles = StyleSheet.create({
         width:32,
         height:32,
         opacity:.1
+    },
+    AddTribesTitle:{
+        borderBottomWidth:.5,
+        borderBottomColor:"#EBEBEB",
+        padding:10    
     }
 })

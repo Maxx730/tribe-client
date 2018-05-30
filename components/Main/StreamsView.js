@@ -20,10 +20,6 @@ export default class StreamsView extends React.Component{
         }
     }
 
-    componentDidMount(){
-       
-    }
-
     ToggleView(view){
         this.setState(previousState =>{
             return{focusedView:view}
@@ -63,7 +59,7 @@ export default class StreamsView extends React.Component{
                 <View style={{flex:1}}>
                     <GlobalSearch/>
                     <StreamToggler toggle={this.ToggleView.bind(this)}/>
-                    {this.state.focusedView === 'events' && <GlobalAddButton toggle={this.props.main.bind(this)}/>}
+                    {this.state.focusedView === 'events' && <GlobalAddButton type='events' toggle={this.props.main.bind(this)}/>}
                     {this.state.focusedView === 'tribes' && <GlobalAddButton type='tribes' toggle={this.props.main.bind(this)}/>}
                 </View>
                 <View style={{flex:flexVal,alignSelf:'stretch'}}>

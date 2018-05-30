@@ -8,10 +8,10 @@ export default class SingleTribe extends React.Component{
                 <View style={styles.TribeTitle}>
                     <Text>{this.props.tribe.title}</Text>
                 </View>
+                <View style={{}}>
+                    <Text style={styles.DescTitle}>Description</Text>
+                </View>
                 <View style={styles.TribeDescription}>
-                    <View style={{borerBottomWidth:.5,borderBottomColor:"#000000",marginBottom:5}}>
-                        <Text style={styles.DescTitle}>Description</Text>
-                    </View>
                     <Text style={{fontSize:8}}>{this.props.tribe.description}</Text>
                 </View>
                 <View style={styles.TribeButtons}>
@@ -65,6 +65,8 @@ const styles = StyleSheet.create({
     TribeDescription:{
         padding:7,
         minHeight:100,
+        borderTopWidth:.5,
+        borderTopColor:"#EBEBEB"
     },
     ButtonRight:{
         borderLeftWidth:.5,
@@ -72,7 +74,11 @@ const styles = StyleSheet.create({
     },
     DescTitle:{
         fontSize:9,
-        fontWeight:"bold"
+        fontWeight:"bold",
+        backgroundColor:"#F5F5F5",
+        borderBottomWidth:.5,
+        borderBottomColor:"#EBEBEB",
+        padding:5
     },
     CountText:{
         bottom:3,

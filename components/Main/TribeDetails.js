@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image, ScrollView} from 'react-native';
 
+import EventStream from './EventStream'
+
 export default class TribeDetails extends React.Component{
     constructor(props){
         super(props);
@@ -35,11 +37,10 @@ export default class TribeDetails extends React.Component{
                 </View>
                 <View style={styles.container}>
                     <View style={styles.TribeBanner}>
+                        <Image style={{width:100,height:100}} source={require('../../assets/defaults/default-placeholder.png')}/>
                         <View style={styles.TitleContainer}>
                             <Text>{this.state.tribe.title}</Text>
                         </View>
-
-                        <Image style={{width:100,height:100}} source={require('../../assets/defaults/default-placeholder.png')}/>
                     </View>
                     <View style={styles.TabHolder}>
                         <TouchableHighlight style={[styles.TribeButton]} onPress={this.ToggleDetailView.bind(this,'descrip')}>
@@ -54,6 +55,9 @@ export default class TribeDetails extends React.Component{
                     </View>
                     {this.state.focusedDetailView === 'descrip' && <View style={styles.TribeDescription}><Text style={{fontSize:8}}>{this.state.tribe.description}</Text></View>}
                 </View>
+
+                {this.state.focusedDetailView === 'events' && <EventStream tribeid={this.props.tribe._id} type="single"/>}
+
             </View>
         );
     }
@@ -81,9 +85,7 @@ const styles = StyleSheet.create({
         backgroundColor:"#FFFFFF",
         position:'absolute',
         top:0,
-        left:0,
-        padding:7,
-        borderTopLeftRadius:2
+        padding:7
     },
     TribeButtonImage:{
         width:24,

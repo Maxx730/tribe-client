@@ -13,8 +13,8 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      focusedView:"addevent",
-      hasLoaded:false
+      focusedView:"login",
+      hasLoaded:true
     }
   }
 
@@ -26,12 +26,12 @@ export default class App extends React.Component {
 
   componentDidMount(){
     try{
-      AsyncStorage.getItem('@TribeStore:username').then(value => {
+      AsyncStorage.getItem('@TribeStore:userId').then(value => {
         fetch('http://squidswap.com:4000/user/'+value).then(response =>{
           return response.json();
         }).then(data => {
           this.setState({
-
+            focusedView:'streams',
             user:data[0],
             hasLoaded:true
           });
