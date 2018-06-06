@@ -7,17 +7,17 @@ export default class ContactUsBar extends React.Component{
             <View style={styles.container}>
                 <View style={{flex:1}}>
                     <TouchableHighlight style={[styles.ContactButton,styles.LeftButton]} onPress={() => {console.log("Working")}}>
-                        <Text>Email</Text>
+                        <Image style={styles.ButtonIcon} source={require('../../assets/icons/at-sign-512.png')}/>
                     </TouchableHighlight>
                 </View>
                 <View style={{flex:1}}>
                     <TouchableHighlight style={[styles.ContactButton,styles.CenterButton]} onPress={() => {console.log("Working")}}>
-                        <Text>Email</Text>
+                        <Image style={styles.ButtonIcon} source={require('../../assets/icons/globe-512.png')}/>
                     </TouchableHighlight>
                 </View>
                 <View style={{flex:1}}>
                     <TouchableHighlight style={[styles.ContactButton,styles.RightButton]} onPress={() => {console.log("Working")}}>
-                        <Text>Email</Text>
+                        <Image style={styles.ButtonIcon} source={require('../../assets/icons/book-512.png')}/>
                     </TouchableHighlight>
                 </View>
             </View>
@@ -29,12 +29,13 @@ const styles = StyleSheet.create({
     container:{
         flexDirection:'row',
         backgroundColor:"#FCFCFC",
-        borderWidth:.5,
-        borderColor:"#EBEBEB",
+        borderWidth:1,
+        borderColor:"#cf8e1c",
         borderRadius:3
     },
     ContactButton:{
-        padding:10
+        padding:10,
+        alignItems: 'center',
     },
     CenterButton:{
         borderRightWidth:.5,
@@ -47,5 +48,10 @@ const styles = StyleSheet.create({
     },
     LeftButton:{
 
+    },
+    ButtonIcon:{
+        width:24,
+        height:24,
+        opacity:.1
     }
 })

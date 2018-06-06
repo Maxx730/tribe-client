@@ -38,13 +38,44 @@ export default class LoginFrame extends React.Component {
 
             //SEND THE FETCH REQUEST HERE, IF IT COMES BACK WITH A SUCCESS WE ARE GOING TO 
             //THEN MOVE ONTO THE NEXT SCREEN.
-            fetch("http://squidswap.com:4000/user/login").then(result => {
+            fetch("http://squidswap.com:4000/user/login",{
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  username: this.state.username,
+                  password: this.state.password,
+                })
+            }).then(result => {
                 return result.json()
             }).then(data => {
+                //HERE WE WANT TO CHECK IF THE LOGIN WAS A SUCCESS OR AND ERROR, IF SUCCESS
+                //WE WANT TO SAVE THE LOGIN ID AND THEN GO INTO NEXT SCREEN, OTHERWISE WE 
+                //WANT TO DISPLAY THE ERROR.
+                if(data.type == "SUCCESS"){
+                    let cont = this;
 
+                    setTimeout(() => {
+                        cont.setState({
+                            isLoading:false
+                        })
+                    },1000)
+                }else{
+                    let cont = this;
+
+                    setTimeout(() => {
+                        cont.setState({
+                            isLoading:false,
+                            errorValue:"Invalid username or password."
+                        })
+                    },1000)
+                }
             })
 
         }else{
+            //DISPLAY THE ERROR IN THE STATE.
             this.setState({
                 errorValue:"Either the username or password field is blank."
             })
@@ -70,6 +101,7 @@ export default class LoginFrame extends React.Component {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
+
         <View style={styles.LogoLayout}>
             <Text>Welcome</Text>
         </View>
@@ -80,7 +112,7 @@ export default class LoginFrame extends React.Component {
                         <Image style={styles.InputIcon} source={require('../../assets/icons/user-icon.png')}/>
                     </View>
                     <View style={{flex:12,padding:10,paddingLeft:15}}>
-                        <TextInput underlineColorAndroid='transparent' onChangeText={(text) => {this.setState({username:text})}} placeholder="Username">
+                        <TextInput underlineColorAndroid='transparent' onChangeText={(text) => {this.setState({username:text})}} placeholder="Username or Email">
                             
                         </TextInput>
                     </View>
@@ -102,11 +134,15 @@ export default class LoginFrame extends React.Component {
                 </TouchableHighlight>
             </View>
 
-            <View style={styles.BelowLayout}>
-                <Text style={[styles.TextBelow,{textAlign:'right',flex:.7}]}>Sign Up</Text>
-                <Text style={styles.TextBelow}>Forgot Password</Text>
+            <View>
+                <Text style={{fontSize:10,textAlign:'center',marginTop:15}}>Or</Text>
             </View>
 
+            <View style={styles.BelowLayout}>
+                <Text style={styles.TextBelow}>I forgot my credentials</Text>
+            </View>
+
+            
             { this.state.isLoading && <LoadingAnimation/> }
 
             <View>
@@ -115,7 +151,8 @@ export default class LoginFrame extends React.Component {
             }
             </View>
         </View>
-        <View style={{padding:10}}>
+        <View style={{padding:10,backgroundColor:"#f8aa23"}}>
+        <Image source={require('../../assets/images/jungleleaf.png')} style={{width:360,height:150,position:'absolute',bottom:30,}}/>
             <ContactUsBar/>
         </View>
       </View>
@@ -201,15 +238,17 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
   },
   TextBelow:{
-      textDecorationLine:"underline",
-      fontSize:12,
+      fontWeight:'bold',
+      fontSize:11,
       padding:7,
       flex:1,
-      textAlign: 'left'
+      textAlign: 'center',
+      color:"#cf8e1c"
   },
   BelowLayout:{
       flexDirection:'row',
-      justifyContent: 'center',
-      marginTop:10
+      justifyContent: 'center'
   }
 });
+
+
