@@ -15,7 +15,7 @@ export default class StreamToggler extends React.Component{
                     <TouchableHighlight style={[styles.StreamToggle,styles.CenterToggle]} onPress={() => {console.log("working")}}>
                         <Image style={styles.ImageIcon} source={require('../../assets/icons/tribes-icon.png')}/>
                     </TouchableHighlight>
-                    <TouchableHighlight style={[styles.StreamToggle,styles.RightToggle]} onPress={() => {console.log("working")}}>
+                    <TouchableHighlight style={[styles.StreamToggle,styles.RightToggle]} onPress={() => {this.props.navigator('Profile',{userId:this.props.user})}}>
                         <Image style={styles.ImageIcon} source={require('../../assets/icons/user-icon.png')}/>
                     </TouchableHighlight>
                 </View>

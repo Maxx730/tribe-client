@@ -6,6 +6,8 @@ import { createStackNavigator } from 'react-navigation';
 import Login from './components/Screens/Login'
 import Signup from './components/Screens/Signup'
 import Streams from './components/Screens/Streams'
+import Profile from './components/Screens/Profile'
+import Settings from './components/Screens/Settings'
 
 //Main application class.  This will handle pointing the user
 //to the correct place based on whether or not they are already
@@ -13,7 +15,9 @@ import Streams from './components/Screens/Streams'
 const AppNav = createStackNavigator({
   Login: { screen:Login },
   Signup: { screen:Signup },
-  Streams: { screen:Streams }
+  Streams: { screen:Streams },
+  Profile: { screen:Profile },
+  Settings: { screen:Settings }
 });
 
 export default AppNav;

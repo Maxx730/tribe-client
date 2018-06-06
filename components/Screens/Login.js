@@ -29,7 +29,7 @@ export default class LoginFrame extends React.Component {
     //MAKE SURE BOTH THE USERNAME AND PASSWORD FIELDS HAVE VALUES,
     //THEN SEND FETCH REQUEST TO THE SERVER TO CHECK/RETURN THE
     //USER ID
-    RequestLogin(){
+    RequestLogin(nav){
         if(this.state.username != null && this.state.password != null){
             this.setState({
                 isLoading:true,
@@ -54,6 +54,7 @@ export default class LoginFrame extends React.Component {
                 //HERE WE WANT TO CHECK IF THE LOGIN WAS A SUCCESS OR AND ERROR, IF SUCCESS
                 //WE WANT TO SAVE THE LOGIN ID AND THEN GO INTO NEXT SCREEN, OTHERWISE WE 
                 //WANT TO DISPLAY THE ERROR.
+                console.log(data);
                 if(data.type == "SUCCESS"){
                     let cont = this;
 
@@ -62,6 +63,10 @@ export default class LoginFrame extends React.Component {
                             isLoading:false
                         })
                     },1000)
+
+                    this.props.navigation.navigate('Streams',{
+                        userId:data._id
+                    })
                 }else{
                     let cont = this;
 
@@ -130,7 +135,7 @@ export default class LoginFrame extends React.Component {
             </View>
             <View style={{flexDirection:'row',marginTop:10}}>
                 <TouchableHighlight style={styles.LoginButton}>
-                    <Text style={{textAlign:'center',color:"#FFF",fontWeight:'bold'}} onPress={this.RequestLogin.bind(this)}>Sign In</Text>
+                    <Text style={{textAlign:'center',color:"#FFF",fontWeight:'bold'}} onPress={this.RequestLogin.bind(this,navigate)}>Sign In</Text>
                 </TouchableHighlight>
             </View>
 
