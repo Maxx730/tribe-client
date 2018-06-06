@@ -8,6 +8,7 @@ import GlobalSearch from './GlobalSearch'
 import TribesStream from './TribesStream'
 import ProfileView from './ProfileView'
 import TribeDetails from './TribeDetails'
+import TopRightDrawer from './TopRightDrawer'
 
 export default class StreamsView extends React.Component{
     constructor(props){
@@ -56,9 +57,14 @@ export default class StreamsView extends React.Component{
 
         return(
             <View style={styles.container}>
-                <View style={{flex:1}}>
-                    <GlobalSearch/>
-                    <StreamToggler toggle={this.ToggleView.bind(this)}/>
+                <View style={{zIndex:99}}>
+                    <View style={{flexDirection:'row'}}>
+                        <GlobalSearch/>
+                        <TopRightDrawer logout={this.props.logout.bind(this)}/>
+                    </View>
+                </View>
+                <View>
+                    <StreamToggler style={{zIndex:1}} toggle={this.ToggleView.bind(this)}/>
                     {this.state.focusedView === 'events' && <GlobalAddButton type='events' toggle={this.props.main.bind(this)}/>}
                     {this.state.focusedView === 'tribes' && <GlobalAddButton type='tribes' toggle={this.props.main.bind(this)}/>}
                 </View>

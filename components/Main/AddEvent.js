@@ -11,7 +11,8 @@ export default class AddEvent extends React.Component{
             hasLoaded:false,
             tribes:[],
             startDate:null,
-            endDate:null
+            endDate:null,
+            newEvent:{}
         }
     }
 
@@ -169,3 +170,6 @@ const styles = StyleSheet.create({
         padding:10    
     }
 })
+
+
+

@@ -9,13 +9,13 @@ export default class StreamToggler extends React.Component{
                 
                 </View>
                 <View style={styles.BottomHalf}>
-                    <TouchableHighlight style={[styles.StreamToggle,styles.LeftToggle]} onPress={this.props.toggle.bind(this,'events')}>
+                    <TouchableHighlight style={[styles.StreamToggle,styles.LeftToggle]} onPress={() => {console.log("working")}}>
                         <Image style={styles.ImageIcon} source={require('../../assets/icons/calendar-icon.png')}/>
                     </TouchableHighlight>
-                    <TouchableHighlight style={[styles.StreamToggle,styles.CenterToggle]} onPress={this.props.toggle.bind(this,'tribes')}>
+                    <TouchableHighlight style={[styles.StreamToggle,styles.CenterToggle]} onPress={() => {console.log("working")}}>
                         <Image style={styles.ImageIcon} source={require('../../assets/icons/tribes-icon.png')}/>
                     </TouchableHighlight>
-                    <TouchableHighlight style={[styles.StreamToggle,styles.RightToggle]} onPress={this.props.toggle.bind(this,'profile')}>
+                    <TouchableHighlight style={[styles.StreamToggle,styles.RightToggle]} onPress={() => {console.log("working")}}>
                         <Image style={styles.ImageIcon} source={require('../../assets/icons/user-icon.png')}/>
                     </TouchableHighlight>
                 </View>
@@ -26,7 +26,7 @@ export default class StreamToggler extends React.Component{
 
 const styles = StyleSheet.create({
     container:{
-
+        marginTop:7
     },
     TopHalf:{
         height:10,

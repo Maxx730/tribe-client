@@ -1,104 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import { View, Text } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 
-//IMPORT CREATED COMPONENTS HERE.
-import LoginFrame from './components/LoginFrame'
-import SignUpFrame from './components/SignUpFrame'
-import StreamsView from './components/Main/StreamsView'
-import AddTribe from './components/Main/AddTribe'
-import AddEvent from './components/Main/AddEvent'
+//IMPORT OUR SCREENS HERE.
+import Login from './components/Screens/Login'
+import Signup from './components/Screens/Signup'
+import Streams from './components/Screens/Streams'
 
-export default class App extends React.Component {
-  constructor(props){
-    super(props);
-
-    this.state = {
-      focusedView:"login",
-      hasLoaded:true
-    }
-  }
-
-  ToggleView(view){
-    this.setState({
-      focusedView:view
-    });
-  }
-
-  componentDidMount(){
-    try{
-      AsyncStorage.getItem('@TribeStore:userId').then(value => {
-        fetch('http://squidswap.com:4000/user/'+value).then(response =>{
-          return response.json();
-        }).then(data => {
-          this.setState({
-            focusedView:'streams',
-            user:data[0],
-            hasLoaded:true
-          });
-        });
-      });
-    }catch(err){
-        console.log('ERROR FETCHING USER FROM STORAGE');
-    }
-  }
-
-  render() {
-    if(this.state.hasLoaded){
-      switch(this.state.focusedView){
-        case "login":
-          return (
-            <View style={styles.container}>
-              <LoginFrame toggle={this.ToggleView.bind(this)}/>
-            </View>
-          );
-        break;
-        case "signup":
-          return (
-            <View style={styles.container}>
-              <SignUpFrame/>
-            </View>
-          );
-        break;
-  
-        case "addtribe":
-        return (
-          <View style={styles.container}>
-            <AddTribe back={this.ToggleView.bind(this)}/>
-          </View>
-        );
-        break;
-  
-        case "addevent":
-        return (
-          <View style={styles.container}>
-            <AddEvent back={this.ToggleView.bind(this)} user={this.state.user}/>
-          </View>
-        );
-        break;
-  
-        case "streams":
-            return (
-              <View style={styles.container}>
-                <StreamsView main={this.ToggleView.bind(this)} user={this.state.user}/>
-              </View>
-            );
-        break;
-      }
-    }else{
-      return (
-        <View style={styles.container}>
-          <Text>Loading...</Text>
-        </View>
-      );
-    }
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    paddingLeft:10,
-    paddingRight:10,
-    backgroundColor:"#f3f3f3",
-    flex:1
-  },
+//Main application class.  This will handle pointing the user
+//to the correct place based on whether or not they are already
+//logged in or not.
+const AppNav = createStackNavigator({
+  Login: { screen:Login },
+  Signup: { screen:Signup },
+  Streams: { screen:Streams }
 });
+
+export default AppNav;

@@ -9,7 +9,7 @@ export default class GlobalSearch extends React.Component{
                     <Image style={{width:16,height:16,opacity:.1}} source={require('../../assets/icons/search-icon.png')}/>
                 </View>
                 <View style={styles.SearchInput}>
-                    <TextInput underlineColorAndroid='transparent' placeholder='Search'/>
+                    <TextInput style={{flex:1,width:200,paddingLeft:6}} underlineColorAndroid='transparent' placeholder='Search'/>
                 </View>
             </View>
         );
@@ -22,17 +22,15 @@ const styles = StyleSheet.create({
         borderRadius:2,
         borderWidth:.5,
         borderColor:"#EBEBEB",
-        padding:7,
-        marginBottom:7,
-        flexDirection:'row'
+        padding:10,
+        flexDirection:'row',
     },
     SearchIcon:{
-        flex:1,
         borderRightWidth:.5,
         borderColor:"#EBEBEB",
+        paddingRight:10
     },
     SearchInput:{
-        flex:11,
         paddingLeft:5
     }
 });

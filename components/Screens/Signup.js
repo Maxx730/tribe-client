@@ -1,18 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image,Button} from 'react-native';
 
-export default class SignUpFrame extends React.Component{
+export default class SignUp extends React.Component{
+    static navigationOptions = {
+        title: "Signup For Tribe",
+        headerStyle:{
+            backgroundColor:"#f8aa23",
+            elevation: 0
+        },
+        headerTintColor: "#FFF",
+    }
+
     render(){
         return(
             <View style={styles.container}>
-                <View style={styles.SignUpHead}>
-                    <TouchableHighlight style={styles.BackButton} onPress={() => {}}>
-                        <Image style={styles.ButtonIcon} source={require('../assets/icons/back-icon.png')}/>
-                    </TouchableHighlight>
-                    <View style={styles.TitleText}>
-                        <Text>Signup</Text>
-                    </View>
-                </View>
                 <View>
                     <View style={{padding:7}}>
                         <TextInput underlineColorAndroid='transparent' style={styles.InputField} placeholder="Username">
@@ -33,11 +34,11 @@ export default class SignUpFrame extends React.Component{
                     <Text>
                         User Agreement
                     </Text>
-                </View>
-                <View style={styles.BottomButtons}>
-                    <TouchableHighlight style={styles.BottomButton} onPress={() => {}}>
-                        <Image style={styles.ButtonIcon} source={require('../assets/icons/arrow-right-icon.png')}/>
-                    </TouchableHighlight>
+                    <Text style={{marginTop:10,fontSize:10}}>
+                    Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the http://www.mywebsite.com (change this) website and the My Mobile App (change this) mobile application (the "Service") operated by My Company (change this) ("us", "we", or "our").
+                    Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.
+                    By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.
+                    </Text>
                 </View>
             </View>
         );
@@ -46,11 +47,11 @@ export default class SignUpFrame extends React.Component{
 
 const styles = StyleSheet.create({
     container:{
-        marginTop:50,
         backgroundColor:"#FCFCFC",
         borderRadius:2,
         borderWidth:.5,
-        borderColor:"#EBEBEB"
+        borderColor:"#EBEBEB",
+        flex:1
     },
     SignUpHead:{
         borderTopRightRadius:2,
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
           borderBottomLeftRadius:2
       },
       UserAgreement:{
-          padding:7,
+          padding:10,
           borderTopColor:"#EBEBEB",
           borderTopWidth:.5,
           borderBottomColor:"#EBEBEB",
