@@ -18,11 +18,18 @@ export default class Settings extends React.Component{
                 <Text style={styles.SettingsTitle}>
                     Settings
                 </Text>
-                <View>
+                <View style={styles.SettingsList}>
                     <ScrollView>
-                        <Text>
-                            Logout
-                        </Text>
+                        <View style={styles.ListItem}>
+                            <Text>
+                                Show Tribes First
+                            </Text>
+                        </View>
+                        <View style={styles.ListItem}>
+                            <Text>
+                                Logout
+                            </Text>
+                        </View>
                     </ScrollView>
                 </View>
             </View>
@@ -32,12 +39,35 @@ export default class Settings extends React.Component{
 
 const styles = StyleSheet.create({
     container:{
+        backgroundColor:"#FCFCFC",
+        borderWidth:.5,
+        borderColor:"#EBEBEB",
+        borderTopWidth:0,
+        padding:10,
         flex:1
     },
     SettingsTitle:{
         padding:10,
-        borderBottomWidth:1,
-        borderBottomColor:"red",
-        backgroundColor:"blue"
+        flexDirection:'row',
+        borderColor:"#EBEBEB",
+        borderWidth:.5,
+        borderRadius:3,
+        backgroundColor:"#FFF"
+    },
+    SettingsList:{
+        flexDirection:'row',
+        borderColor:"#EBEBEB",
+        borderWidth:.5,
+        borderRadius:3,
+        backgroundColor:"#FFF",
+        marginTop:10
+    },
+    ListItem:{
+        padding:10,
+        borderBottomColor:"#EBEBEB",
+        borderBottomWidth:.5
+    },
+    LastItem:{
+        borderBottomWidth:0
     }
 })

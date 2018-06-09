@@ -18,7 +18,7 @@ export default class GlobalSearch extends React.Component{
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:"#FCFCFC",
+        backgroundColor:"#FFF",
         borderRadius:2,
         borderWidth:.5,
         borderColor:"#EBEBEB",

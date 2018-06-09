@@ -26,11 +26,12 @@ export default class StreamToggler extends React.Component{
 
 const styles = StyleSheet.create({
     container:{
-        marginTop:7
+        marginTop:7,
+        backgroundColor:"#FFF"
     },
     TopHalf:{
         height:10,
-        backgroundColor:"#FCFCFC",
+        backgroundColor:"#FFF",
         borderTopRightRadius:2,
         borderTopLeftRadius:2,
         borderWidth:.5,
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     },
     BottomHalf:{
         height:40,
-        backgroundColor:"#FCFCFC",
+        backgroundColor:"#FFF",
         borderBottomLeftRadius:2,
         borderBottomRightRadius:2,
         flexDirection:'row',
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     StreamToggle:{
         flex:1,
         padding:7,
-        backgroundColor:"#FCFCFC",
+        backgroundColor:"#FFF",
         justifyContent: 'center',
         alignItems: 'center',
     },
