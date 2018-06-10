@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, AsyncStorage, Image, TouchableHighlight} from '
 import GlobalSearch from '../Main/GlobalSearch'
 import StreamToggler from '../Main/StreamToggler'
 import BottomActionbar from '../Main/BottomActionbar'
+import TribesStream from '../Main/TribesStream'
 
 export default class Streams extends React.Component{
     static navigationOptions = ({navigation}) => ({
@@ -51,14 +52,14 @@ export default class Streams extends React.Component{
 
         return(
             <View style={styles.container}>
-                <View style={{flex:6,padding:10}}>
+                <View style={{borderBottomWidth:1,borderBottomColor:"#EBEBEB"}}>
                     <GlobalSearch/>
-                    <StreamToggler user={this.state.userId} navigator={navigate}/>
+                    <StreamToggler toggle={this.Togglestream.bind(this)} user={this.state.userId} navigator={navigate}/>
                 </View>
                 <View style={styles.StreamView}>
-
+                    <TribesStream user={this.state.userId}/>
                 </View>
-                <View style={{flex:1}}>
+                <View style={{}}>
                     <BottomActionbar user={this.state.userId}/>
                 </View>
             </View>
@@ -72,6 +73,6 @@ const styles = StyleSheet.create({
         backgroundColor:"#FCFCFC"
     },
     StreamView:{
-
+        flex:1
     }
 })

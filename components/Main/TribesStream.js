@@ -14,7 +14,7 @@ export default class TribesStream extends React.Component{
     }
 
     componentDidMount(){
-        fetch("http://squidswap.com:4000/user/tribes/"+this.props.user._id).then(result => {
+        fetch("http://squidswap.com:4000/user/tribes/5af5b25deda5ff097ffa299e").then(result => {
             return result.json();
         }).then(data => {
             this.setState({
@@ -23,14 +23,14 @@ export default class TribesStream extends React.Component{
             })
         });
     }
-    
+
 
     render(){
         return(
             <View style={styles.container}>
                 <ScrollView>
                     {this.state.tribes.map(tribe => {
-                        return <SingleTribe toggle={this.props.toggle} key={tribe._id} tribe={tribe}/>
+                        return <SingleTribe key={tribe._id} tribe={tribe}/>
                     })}
                 </ScrollView>
             </View>

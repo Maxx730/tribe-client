@@ -20,15 +20,15 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor:"#FFF",
         borderRadius:2,
-        borderWidth:.5,
+        borderWidth:1,
         borderColor:"#EBEBEB",
         padding:10,
         flexDirection:'row',
     },
     SearchIcon:{
-        borderRightWidth:.5,
+        borderRightWidth:1,
         borderColor:"#EBEBEB",
-        paddingRight:10
+        paddingRight:13
     },
     SearchInput:{
         paddingLeft:5
