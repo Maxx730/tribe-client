@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, AsyncStorage, Image, TouchableHighlight} from '
 //IMPORT ALL OF OUR REACT COMPONENTS
 import GlobalSearch from '../Main/GlobalSearch'
 import StreamToggler from '../Main/StreamToggler'
+import BottomActionbar from '../Main/BottomActionbar'
 
 export default class Streams extends React.Component{
     static navigationOptions = ({navigation}) => ({
@@ -22,8 +23,16 @@ export default class Streams extends React.Component{
         super(props)
 
         this.state = {
-            userId:null
+            userId:null,
+            focusedStream:"events"
         }
+    }
+
+    //TOGGLES THE STREAM AND THEN RERENDERS THE VIEW.
+    Togglestream(stream){
+        this.setState({
+            focusedStream:stream
+        })
     }
 
     //FETCH ALL THE DATA ABOUT THIS USER FROM THE BACKEND.
@@ -42,8 +51,16 @@ export default class Streams extends React.Component{
 
         return(
             <View style={styles.container}>
-                <GlobalSearch/>
-                <StreamToggler user={this.state.userId} navigator={navigate}/>
+                <View style={{flex:6,padding:10}}>
+                    <GlobalSearch/>
+                    <StreamToggler user={this.state.userId} navigator={navigate}/>
+                </View>
+                <View style={styles.StreamView}>
+
+                </View>
+                <View style={{flex:1}}>
+                    <BottomActionbar user={this.state.userId}/>
+                </View>
             </View>
         )
     }
@@ -52,7 +69,9 @@ export default class Streams extends React.Component{
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor:"#FCFCFC",
-        padding:7
-    }  
+        backgroundColor:"#FCFCFC"
+    },
+    StreamView:{
+
+    }
 })

@@ -5,25 +5,27 @@ export default class BottomActionbar extends React.Component{
     render(){
         return(
             <View style={styles.container}>
-                <TouchableHighlight style={[styles.ActionButton]} onPress={() => {
-                    console.log("working")
-                }}>
-                    <Text>
-                        Button
-                    </Text>
-                </TouchableHighlight>
-                <TouchableHighlight style={[styles.ActionButton,styles.CenterButton]} onPress={() => {
-                    console.log("working")
-                }}>
-                    <Image source={require('../../assets/icons/plus-512.png')}/>
-                </TouchableHighlight>
-                <TouchableHighlight style={[styles.ActionButton]} onPress={() => {
-                    console.log("working")
-                }}>
-                    <Text>
-                        Button
-                    </Text>
-                </TouchableHighlight>
+                <View style={{flex:1}}>
+                    <TouchableHighlight style={styles.AddCircle}>
+                        <Image style={styles.ActionIcon} source={require('../../assets/icons/plus-512.png')}/>
+                    </TouchableHighlight>
+                    <View style={{flexDirection:'row'}}>
+                        <TouchableHighlight style={[styles.ActionButton]} onPress={() => {
+                            console.log("working")
+                        }}>
+                            <Text>
+                                Button
+                            </Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight style={[styles.ActionButton]} onPress={() => {
+                            console.log("working")
+                        }}>
+                            <Text>
+                                Button
+                            </Text>
+                        </TouchableHighlight>
+                    </View>
+                </View>
             </View>
         )
     }
@@ -32,16 +34,28 @@ export default class BottomActionbar extends React.Component{
 const styles = StyleSheet.create({
     container:{
         backgroundColor:"#FFF",
-        flexDirection:'row'
+        flexDirection:'row',
+        position:'absolute',
+        bottom:0
     },
     ActionButton:{
-        flex:1
+        flex:1,
+        padding:10
     },
     CenterButton:{
-        borderRightWidth:.5,
-        borderRightColor:"red",
-        borderLeftWidth:.5,
-        borderLeftColor:"red",
-        backgroundColor:"red"
+
+    },
+    ActionIcon:{
+        width:24,
+        height:24
+    },
+    AddCircle:{
+        backgroundColor:"#f8aa23",
+        borderRadius:100,
+        padding:20,
+        top:0,
+        right:15,
+        position:'absolute'
     }
 });
+

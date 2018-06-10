@@ -29,7 +29,7 @@ export default class Profile extends React.Component{
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
         if (status === 'granted') {
-            
+
         } else {
           throw new Error('Location permission not granted');
         }
@@ -56,16 +56,11 @@ export default class Profile extends React.Component{
                 <View style={styles.container}>
                     <View style={styles.ProfileTop}>
                         <View style={[styles.ProfileImage]}>
-                            <Image style={{width:100,height:100}} source={require('../../assets/defaults/default-user.png')}/>
+                            <Image style={{width:400,height:200}} source={require('../../assets/defaults/generic-banner.jpg')}/>
                         </View>
-                        <View sytle={styles.UserInformationTitles}>
-                            <Text>
-                                {this.state.user.username}
-                            </Text>
-                            <Text>
-                                {this.state.user.firstname} {this.state.user.lastname}
-                            </Text>
-                        </View>
+                    </View>
+                    <View style={{}}>
+
                     </View>
                     <View style={styles.ProfileToggler}>
                         <TouchableHighlight style={styles.ProfileToggle}>
@@ -97,23 +92,22 @@ export default class Profile extends React.Component{
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:"#FCFCFC",
-        borderWidth:.5,
-        borderColor:"#EBEBEB",
-        borderTopWidth:0,
+        backgroundColor:"#7b7b7b",
         padding:10,
         flex:1
     },
     ProfileImage:{
-        borderRightColor:"#EBEBEB",
-        borderRightWidth:.5
+
     },
     ProfileTop:{
-        flexDirection:'row',
-        borderColor:"#EBEBEB",
-        borderWidth:.5,
-        borderRadius:3,
-        backgroundColor:"#FFF"
+        position:'absolute',
+        top:0,
+        right:0,
+        left:0,
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor:"#E5E5E5"
     },
     UserInformationTitles:{
         flex:1,
@@ -121,15 +115,17 @@ const styles = StyleSheet.create({
     },
     ProfileToggler:{
         flexDirection:'row',
-        marginTop:10,
+        marginTop:100,
         borderRadius:3,
-        borderColor:"#EBEBEB",
-        borderWidth:.5,
+        borderColor:"#8A8A8A",
+        borderWidth:1,
         backgroundColor:"#FFF"
     },
     ProfileToggle:{
         flex:1,
-        padding:10
+        padding:10,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     CenterToggle:{
         borderRightWidth:.5,
@@ -139,8 +135,8 @@ const styles = StyleSheet.create({
     },
     ToggleView:{
         borderRadius:3,
-        borderColor:"#EBEBEB",
-        borderWidth:.5,
+        borderColor:"#8A8A8A",
+        borderWidth:1,
         marginTop:10,
         flex:1,
         padding:10,
