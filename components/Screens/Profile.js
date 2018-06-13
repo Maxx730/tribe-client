@@ -35,6 +35,57 @@ export default class Profile extends React.Component{
         }
     }
 
+    convertDate(date){
+        let newDate = new Date(date);
+        let month = "";
+
+        switch(newDate.getMonth()){
+            case 0:
+                month = "January"
+            break;
+            case 1:
+                month = "February"
+            break;
+            case 2:
+                month = "March"
+            break;
+            case 3:
+                month = "April"
+            break;
+            case 4:
+                month = "May"
+            break;
+            case 5:
+                month = "June"
+            break;
+            case 6:
+                month = "July"
+            break;
+            case 7:
+                month = "August"
+            break;
+            case 8:
+                month = "September"
+            break;
+            case 9:
+                month = "October"
+            break;
+            case 10:
+                month = "November"
+            break;
+            case 11:
+                month = "December"
+            break;
+        }
+
+        return (
+            <View>
+                <Text style={{color:'#FFF',fontSize:12,fontWeight:'bold'}}>Member Since</Text>
+                <Text style={{color:'#FFF',fontSize:10}}>{month} {newDate.getDay()}, {newDate.getFullYear()}</Text>
+            </View>
+        )
+    }
+
     componentDidMount(){
         let cont = this;
 
@@ -44,7 +95,9 @@ export default class Profile extends React.Component{
             this.setState({
                 user:data[0],
                 hasLoaded:true
-            });       
+            });
+
+            console.log(this.state.user)
 
             cont.requestCameraPermission();     
         });
@@ -58,9 +111,17 @@ export default class Profile extends React.Component{
                         <View style={[styles.ProfileImage]}>
                             <Image style={{width:400,height:200}} source={require('../../assets/defaults/generic-banner.jpg')}/>
                         </View>
-                    </View>
-                    <View style={{}}>
-
+                        <View style={styles.UserInformationTitles}>
+                            <Text style={styles.UserInfoUsername}>
+                                {this.state.user.username}
+                            </Text>
+                            <Text style={styles.UserInfoFullname}>
+                                {this.state.user.firstname} {this.state.user.lastname}
+                            </Text>
+                        </View>
+                        <View style={styles.UserInfoJoinDate}>
+                            {this.convertDate(this.state.user.signup)}
+                        </View>
                     </View>
                     <View style={styles.ProfileToggler}>
                         <TouchableHighlight style={styles.ProfileToggle}>
@@ -104,21 +165,34 @@ const styles = StyleSheet.create({
         top:0,
         right:0,
         left:0,
-        flex:1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor:"#E5E5E5"
     },
     UserInformationTitles:{
-        flex:1,
-        padding:10
+        padding:10,
+        position:'absolute',
+        top:0,
+        left:0
+    },
+    UserInfoUsername:{
+        color:"#FFF",
+        fontSize:20,
+        fontWeight:'bold'
+    },
+    UserInfoFullname:{
+        color:"#FFF",
+        fontSize:10
+    },
+    UserInfoJoinDate:{
+        position:'absolute',
+        right:20,
+        top:15
     },
     ProfileToggler:{
         flexDirection:'row',
         marginTop:100,
         borderRadius:3,
-        borderColor:"#8A8A8A",
-        borderWidth:1,
         backgroundColor:"#FFF"
     },
     ProfileToggle:{
@@ -135,8 +209,6 @@ const styles = StyleSheet.create({
     },
     ToggleView:{
         borderRadius:3,
-        borderColor:"#8A8A8A",
-        borderWidth:1,
         marginTop:10,
         flex:1,
         padding:10,

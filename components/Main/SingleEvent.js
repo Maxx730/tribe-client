@@ -73,10 +73,9 @@ export default class SingleEvent extends React.Component{
 const styles = StyleSheet.create({
     container:{
         backgroundColor:"#FCFCFC",
-        borderRadius:2,
+
         borderWidth:.5,
         borderColor:"#EBEBEB",
-        marginTop:7
     },
     EventTitle:{
         borderBottomWidth:.5,

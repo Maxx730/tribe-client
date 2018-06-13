@@ -3,48 +3,51 @@ import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image} from 'rea
 
 export default class SingleTribe extends React.Component{
     render(){
-        return(
-            <View style={styles.container}>
-                <View style={styles.TribeTitle}>
-                    <Text>{this.props.tribe.title}</Text>
-                </View>
-                <View style={{}}>
-                    <Text style={styles.DescTitle}>Description</Text>
-                </View>
-                <View style={styles.TribeDescription}>
-                    <Text style={{fontSize:8}}>{this.props.tribe.description}</Text>
-                </View>
-                <View style={styles.TribeButtons}>
-                    <TouchableHighlight style={styles.TribeButton} onPress={() => {console.log('working')}}>
-                        <View>
-                            <Text style={styles.CountText}>
-                                {this.props.tribe.members.length}
-                            </Text>
-                            <Image style={styles.TribeButtonImage} source={require('../../assets/icons/tribes-icon.png')}/>
+            return(
+                <View>
+                    <View style={styles.RoundTop}>
+
+                    </View>
+                    <View style={styles.container}>
+                        <View style={styles.TribeTitle}>
+                            <View style={{backgroundColor:'rgba(0, 0, 0, 0.3)',position:'absolute',zIndex:999,left:0,top:0,width:400,padding:5}}>
+                                <Text style={{color:"#FFF"}}>{this.props.tribe.title}</Text>
+                            </View>
+                            <Image resizeMode={'cover'} style={styles.BannerImage} source={require('../../assets/defaults/beachfire.jpg')}/>
                         </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={[styles.TribeButton,styles.ButtonRight]}>
-                        <Image style={styles.TribeButtonImage} source={require('../../assets/icons/arrow-right-icon.png')}/>
-                    </TouchableHighlight>
+                        <View style={styles.TribeDescription}>
+                            <Text style={{fontSize:8}}>{this.props.tribe.description}</Text>
+                        </View>
+                        <View style={styles.TribeButtons}>
+                            <TouchableHighlight style={styles.TribeButton} onPress={() => {console.log('working')}}>
+                                <View>
+                                    <Text style={styles.CountText}>
+                                        {this.props.tribe.members.length}
+                                    </Text>
+                                    <Image style={styles.TribeButtonImage} source={require('../../assets/icons/tribes-icon.png')}/>
+                                </View>
+                            </TouchableHighlight>
+                            <TouchableHighlight style={[styles.TribeButton,styles.ButtonRight]} onPress={() => { this.props.navigator('Tribe') }}>
+                                <Image style={styles.TribeButtonImage} source={require('../../assets/icons/arrow-right-icon.png')}/>
+                            </TouchableHighlight>
+                        </View>
+                    </View>
                 </View>
-            </View>
-        );
+            );
     }
 }
-
 
 const styles = StyleSheet.create({
     container:{
         backgroundColor:"#FCFCFC",
-        borderRadius:2,
-        borderWidth:.5,
+        borderBottomWidth:.5,
         borderColor:"#EBEBEB",
-        marginTop:7
+        borderRadius:3
     },
     TribeTitle:{
-        padding:7,
-        borderBottomWidth:.5,
-        borderBottomColor:"#EBEBEB"
+        height:100,
+        overflow:'hidden',
+        position:'relative'
     },
     TribeButtons:{
         flexDirection:'row',
@@ -63,10 +66,7 @@ const styles = StyleSheet.create({
         opacity:.1
     },
     TribeDescription:{
-        padding:7,
-        minHeight:100,
-        borderTopWidth:.5,
-        borderTopColor:"#EBEBEB"
+        padding:7
     },
     ButtonRight:{
         borderLeftWidth:.5,
@@ -84,5 +84,20 @@ const styles = StyleSheet.create({
         bottom:3,
         left:-16,
         position:"absolute"
+    },
+    BannerImage:{
+        width:400,
+        position:'absolute',
+        top:0,
+        left:0,
+        borderTopRightRadius:3,
+        borderTopLeftRadius:3
+    },
+    RoundTop:{
+        borderTopRightRadius:3,
+        borderTopLeftRadius:3,
+        backgroundColor:"#FFF",
+        height:10,
+        marginTop:5,
     }
 });

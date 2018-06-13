@@ -29,8 +29,8 @@ export default class TribesStream extends React.Component{
         return(
             <View style={styles.container}>
                 <ScrollView>
-                    {this.state.tribes.map(tribe => {
-                        return <SingleTribe key={tribe._id} tribe={tribe}/>
+                    {this.state.tribes.map((tribe) => {
+                        return <SingleTribe navigator={this.props.navigator} key={tribe._id} tribe={tribe}/>
                     })}
                 </ScrollView>
             </View>

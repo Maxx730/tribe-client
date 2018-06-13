@@ -19,11 +19,12 @@ export default class GlobalSearch extends React.Component{
 const styles = StyleSheet.create({
     container:{
         backgroundColor:"#FFF",
-        borderRadius:2,
-        borderWidth:1,
-        borderColor:"#EBEBEB",
+        borderBottomWidth:.5,
+        borderBottomColor:"#EBEBEB",
         padding:10,
         flexDirection:'row',
+        borderTopRightRadius:3,
+        borderTopLeftRadius:3
     },
     SearchIcon:{
         borderRightWidth:1,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AsyncStorage, Image, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage, Image, TouchableHighlight, StatusBar} from 'react-native';
 
 //IMPORT ALL OF OUR REACT COMPONENTS
 import GlobalSearch from '../Main/GlobalSearch'
@@ -11,9 +11,15 @@ export default class Streams extends React.Component{
     static navigationOptions = ({navigation}) => ({
         title: "Streams",
         headerStyle:{
-            backgroundColor:"#f8aa23",
+            backgroundColor:"#141414",
             elevation: 0,
-            padding:0
+            padding:0,
+            shadowColor:'transparent',
+            shadowRadius: 0,
+            borderWidth:0,
+            shadowOffset: {
+                height: 0,
+            }
         },
         headerTintColor: "#FFF",
         headerRight:<TouchableHighlight style={{padding:7,marginRight:3}} onPress={() => {navigation.navigate('Settings')}}><Image style={{width:24,height:24}} source={require('../../assets/icons/settings-512.png')}/></TouchableHighlight>,
@@ -52,15 +58,13 @@ export default class Streams extends React.Component{
 
         return(
             <View style={styles.container}>
-                <View style={{borderBottomWidth:1,borderBottomColor:"#EBEBEB"}}>
+                <StatusBar barStyle="light-content" />
+                <View style={{padding:5,paddingBottom:0}}>
                     <GlobalSearch/>
                     <StreamToggler toggle={this.Togglestream.bind(this)} user={this.state.userId} navigator={navigate}/>
                 </View>
                 <View style={styles.StreamView}>
-                    <TribesStream user={this.state.userId}/>
-                </View>
-                <View style={{}}>
-                    <BottomActionbar user={this.state.userId}/>
+                    <TribesStream navigator={navigate} user={this.state.userId}/>
                 </View>
             </View>
         )
@@ -70,9 +74,11 @@ export default class Streams extends React.Component{
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor:"#FCFCFC"
+        backgroundColor:"#141414"
     },
     StreamView:{
-        flex:1
+        flex:1,
+        padding:5,
+        backgroundColor:"#141414"
     }
 })
