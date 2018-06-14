@@ -2,26 +2,37 @@ import React from 'react';
 import { PermissionsAndroid, StyleSheet, Text, View, TextInput, TouchableHighlight, Image, AsyncStorage} from 'react-native';
 
 export default class BottomActionbar extends React.Component{
+    constructor(props){
+        super(props)
+
+        this.state = {
+            user:{},
+            tribe:{},
+            events:{}
+        }
+    }
+
+    componentDidMount(){
+        
+    }
+
     render(){
         return(
             <View style={styles.container}>
                 <View style={{flex:1}}>
-                    <TouchableHighlight style={styles.AddCircle}>
-                        <Image style={styles.ActionIcon} source={require('../../assets/icons/plus-512.png')}/>
-                    </TouchableHighlight>
                     <View style={{flexDirection:'row'}}>
-                        <TouchableHighlight style={[styles.ActionButton]} onPress={() => {
+                        <TouchableHighlight style={[styles.ActionButton,styles.LeftButton]} onPress={() => {
                             console.log("working")
                         }}>
                             <Text>
-                                Button
+                                Create Event
                             </Text>
                         </TouchableHighlight>
-                        <TouchableHighlight style={[styles.ActionButton]} onPress={() => {
+                        <TouchableHighlight style={[styles.ActionButton,styles.RightButton]} onPress={() => {
                             console.log("working")
                         }}>
                             <Text>
-                                Button
+                                Invite
                             </Text>
                         </TouchableHighlight>
                     </View>
@@ -34,28 +45,28 @@ export default class BottomActionbar extends React.Component{
 const styles = StyleSheet.create({
     container:{
         backgroundColor:"#FFF",
+        borderRadius:3,
         flexDirection:'row',
         position:'absolute',
-        bottom:0
+        bottom:5,
+        left:5,
+        right:5
     },
     ActionButton:{
         flex:1,
         padding:10
     },
-    CenterButton:{
-
+    LeftButton:{
+        borderBottomLeftRadius:3,
+        borderTopLeftRadius:3
+    },
+    RightButton:{
+        borderBottomRightRadius:3,
+        borderTopRightRadius:3
     },
     ActionIcon:{
         width:24,
         height:24
-    },
-    AddCircle:{
-        backgroundColor:"#f8aa23",
-        borderRadius:100,
-        padding:20,
-        top:0,
-        right:15,
-        position:'absolute'
     }
 });
 

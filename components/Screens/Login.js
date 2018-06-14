@@ -38,7 +38,7 @@ export default class LoginFrame extends React.Component {
 
             //SEND THE FETCH REQUEST HERE, IF IT COMES BACK WITH A SUCCESS WE ARE GOING TO 
             //THEN MOVE ONTO THE NEXT SCREEN.
-            fetch("http://squidswap.com:4000/user/login",{
+            fetch("http://squidswap.com:4000/login",{
                 method: 'POST',
                 headers: {
                   Accept: 'application/json',
@@ -51,11 +51,11 @@ export default class LoginFrame extends React.Component {
             }).then(result => {
                 return result.json()
             }).then(data => {
+
                 //HERE WE WANT TO CHECK IF THE LOGIN WAS A SUCCESS OR AND ERROR, IF SUCCESS
                 //WE WANT TO SAVE THE LOGIN ID AND THEN GO INTO NEXT SCREEN, OTHERWISE WE 
                 //WANT TO DISPLAY THE ERROR.
-                console.log(data);
-                if(data.type == "SUCCESS"){
+                if(data.RESULT.TYPE.SUCCESS.MESSAGE == "LOGIN PASSED"){
                     let cont = this;
 
                     setTimeout(() => {
@@ -65,7 +65,7 @@ export default class LoginFrame extends React.Component {
                     },1000)
 
                     this.props.navigation.navigate('Streams',{
-                        userId:data._id
+                        userId:data.USER.ID
                     })
                 }else{
                     let cont = this;
@@ -78,7 +78,6 @@ export default class LoginFrame extends React.Component {
                     },1000)
                 }
             })
-
         }else{
             //DISPLAY THE ERROR IN THE STATE.
             this.setState({
@@ -117,7 +116,7 @@ export default class LoginFrame extends React.Component {
                         <Image style={styles.InputIcon} source={require('../../assets/icons/user-icon.png')}/>
                     </View>
                     <View style={{flex:12,padding:10,paddingLeft:15}}>
-                        <TextInput underlineColorAndroid='transparent' onChangeText={(text) => {this.setState({username:text})}} placeholder="Username or Email">
+                        <TextInput autoCapitalize = 'none' underlineColorAndroid='transparent' onChangeText={(text) => {this.setState({username:text})}} placeholder="Username or Email">
                             
                         </TextInput>
                     </View>
@@ -127,7 +126,7 @@ export default class LoginFrame extends React.Component {
                         <Image style={styles.InputIcon} source={require('../../assets/icons/lock-512.png')}/>
                     </View>
                     <View style={{flex:12,padding:10,paddingLeft:15}}>
-                        <TextInput underlineColorAndroid='transparent' secureTextEntry  onChangeText={(text) => {this.setState({password:text})}} placeholder="Password">
+                        <TextInput autoCapitalize = 'none' underlineColorAndroid='transparent' secureTextEntry  onChangeText={(text) => {this.setState({password:text})}} placeholder="Password">
 
                         </TextInput>
                     </View>

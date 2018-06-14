@@ -14,7 +14,7 @@ export default class TribesStream extends React.Component{
     }
 
     componentDidMount(){
-        fetch("http://squidswap.com:4000/user/tribes/5af5b25deda5ff097ffa299e").then(result => {
+        fetch("http://squidswap.com:4000/tribes/"+this.props.user).then(result => {
             return result.json();
         }).then(data => {
             this.setState({

@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TextInput, Image} from 'react-native';
 export default class GlobalSearch extends React.Component{
     render(){
         return(
-            <View style={styles.container}>
+            <View style={[styles.container,this.props.bottomBorder && {borderBottomWidth:0}]}>
                 <View style={[styles.SearchIcon]}>
                     <Image style={{width:16,height:16,opacity:.1}} source={require('../../assets/icons/search-icon.png')}/>
                 </View>

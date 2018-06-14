@@ -93,7 +93,7 @@ export default class Profile extends React.Component{
             return result.json();
         }).then(data => {
             this.setState({
-                user:data[0],
+                user:data,
                 hasLoaded:true
             });
 

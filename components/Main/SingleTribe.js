@@ -27,7 +27,7 @@ export default class SingleTribe extends React.Component{
                                     <Image style={styles.TribeButtonImage} source={require('../../assets/icons/tribes-icon.png')}/>
                                 </View>
                             </TouchableHighlight>
-                            <TouchableHighlight style={[styles.TribeButton,styles.ButtonRight]} onPress={() => { this.props.navigator('Tribe') }}>
+                            <TouchableHighlight style={[styles.TribeButton,styles.ButtonRight]} onPress={() => { this.props.navigator('Tribe',{tribe:this.props.tribe}) }}>
                                 <Image style={styles.TribeButtonImage} source={require('../../assets/icons/arrow-right-icon.png')}/>
                             </TouchableHighlight>
                         </View>

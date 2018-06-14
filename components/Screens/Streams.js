@@ -11,7 +11,7 @@ export default class Streams extends React.Component{
     static navigationOptions = ({navigation}) => ({
         title: "Streams",
         headerStyle:{
-            backgroundColor:"#141414",
+            backgroundColor:"#FFF",
             elevation: 0,
             padding:0,
             shadowColor:'transparent',
@@ -21,7 +21,7 @@ export default class Streams extends React.Component{
                 height: 0,
             }
         },
-        headerTintColor: "#FFF",
+        headerTintColor: "#000",
         headerRight:<TouchableHighlight style={{padding:7,marginRight:3}} onPress={() => {navigation.navigate('Settings')}}><Image style={{width:24,height:24}} source={require('../../assets/icons/settings-512.png')}/></TouchableHighlight>,
         headerLeft:<View></View>
     })
@@ -31,7 +31,8 @@ export default class Streams extends React.Component{
 
         this.state = {
             userId:null,
-            focusedStream:"events"
+            focusedStream:"events",
+            hasLoaded:false
         }
     }
 
@@ -48,7 +49,8 @@ export default class Streams extends React.Component{
         //DURING DEVELOPMENT AS EVENTUALLY WE WANT TO CHECK AND SEE IF THE USER ID
         //IS IN ASYNC STORAGE.
         this.setState({
-            userId:this.props.navigation.state.params.userId
+            userId:this.props.navigation.state.params.userId,
+            hasLoaded:true
         })
     }
 
@@ -56,18 +58,27 @@ export default class Streams extends React.Component{
     render(){
         const { navigate } = this.props.navigation;
 
-        return(
-            <View style={styles.container}>
-                <StatusBar barStyle="light-content" />
-                <View style={{padding:5,paddingBottom:0}}>
-                    <GlobalSearch/>
-                    <StreamToggler toggle={this.Togglestream.bind(this)} user={this.state.userId} navigator={navigate}/>
+        if(this.state.hasLoaded){
+            return(
+                <View style={styles.container}>
+                    <View style={{padding:5,paddingBottom:0}}>
+                        <GlobalSearch/>
+                        <StreamToggler toggle={this.Togglestream.bind(this)} user={this.state.userId} navigator={navigate}/>
+                    </View>
+                    <View style={styles.StreamView}>
+                        <TribesStream navigator={navigate} user={this.state.userId}/>
+                    </View>
                 </View>
-                <View style={styles.StreamView}>
-                    <TribesStream navigator={navigate} user={this.state.userId}/>
+            )
+        }else{
+            return(
+                <View>
+                    <Text>
+                        Loading...
+                    </Text>
                 </View>
-            </View>
-        )
+            )
+        }
     }
 }
 
