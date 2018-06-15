@@ -9,6 +9,7 @@ import Streams from './components/Screens/Streams'
 import Profile from './components/Screens/Profile'
 import Settings from './components/Screens/Settings'
 import Tribe from './components/Screens/Tribe'
+import Create from './components/Screens/Create'
 
 //Main application class.  This will handle pointing the user
 //to the correct place based on whether or not they are already
@@ -19,7 +20,8 @@ const AppNav = createStackNavigator({
   Streams: { screen:Streams },
   Profile: { screen:Profile },
   Settings: { screen:Settings },
-  Tribe:{ screen:Tribe }
+  Tribe:{ screen:Tribe },
+  Create:{ screen:Create }
 });
 
 export default AppNav;

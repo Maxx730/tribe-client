@@ -99,6 +99,8 @@ export default class Profile extends React.Component{
                 hasLoaded:true
             });
 
+            console.log(this.state);
+
             cont.requestCameraPermission();     
         });
     }
@@ -107,7 +109,7 @@ export default class Profile extends React.Component{
         if(this.state.hasLoaded){
             return(
                 <View style={styles.container}>
-                    <NavigationBar navigator={this.props.navigation}/>
+                    <NavigationBar isUser={this.props.navigation.state.params.isUser} navigator={this.props.navigation}/>
                     <View style={styles.ProfileTop}>
                         <View style={styles.ProfileImage}>
                             <Image style={{width:40,height:40}} source={require('../../assets/defaults/default-user.png')}/>
@@ -133,9 +135,9 @@ export default class Profile extends React.Component{
                         </TouchableHighlight>
                     </View>
                     <View style={styles.ToggleView}>
-                        <Text>
-                            User Description
-                        </Text>
+                        {
+                            this.state.user.bio == "" && <Text>No Description</Text>
+                        }
                     </View>
             </View>
             )

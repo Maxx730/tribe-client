@@ -3,6 +3,10 @@ import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image } from 're
 
 export default class NavigationBar extends React.Component{
 
+    componentDidMount(){
+        console.log(this.props)
+    }
+
     RenderEdit(){
         return(
             <TouchableHighlight style={[styles.ButtonRight,styles.NavButton]} onPress={() => {}}>
@@ -21,7 +25,7 @@ export default class NavigationBar extends React.Component{
                         Back
                     </Text>
                 </TouchableHighlight>
-                { this.props.isUser && RenderEdit() }
+                { this.props.isUser == true && this.RenderEdit() }
             </View>
         );
     }
