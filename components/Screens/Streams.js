@@ -19,7 +19,8 @@ export default class Streams extends React.Component{
             borderWidth:0,
             shadowOffset: {
                 height: 0,
-            }
+            },
+            display:'none'
         },
         headerTintColor: "#000",
         headerRight:<TouchableHighlight style={{padding:7,marginRight:3}} onPress={() => {navigation.navigate('Settings')}}><Image style={{width:24,height:24}} source={require('../../assets/icons/settings-512.png')}/></TouchableHighlight>,
@@ -82,10 +83,12 @@ export default class Streams extends React.Component{
     }
 }
 
+
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor:"#141414"
+        backgroundColor:"#141414",
+        marginTop:20
     },
     StreamView:{
         flex:1,

@@ -4,19 +4,19 @@ import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image} from 'rea
 export default class SingleTribe extends React.Component{
     render(){
             return(
-                <View>
+                <View style={this.props.isFirst == true && {marginTop:-5}}>
                     <View style={styles.RoundTop}>
 
                     </View>
                     <View style={styles.container}>
                         <View style={styles.TribeTitle}>
                             <View style={{backgroundColor:'rgba(0, 0, 0, 0.3)',position:'absolute',zIndex:999,left:0,top:0,width:400,padding:5}}>
-                                <Text style={{color:"#FFF"}}>{this.props.tribe.title}</Text>
+                                <Text style={{color:"#FFF",fontSize:18}}>{this.props.tribe.title}</Text>
                             </View>
                             <Image resizeMode={'cover'} style={styles.BannerImage} source={require('../../assets/defaults/beachfire.jpg')}/>
                         </View>
                         <View style={styles.TribeDescription}>
-                            <Text style={{fontSize:8}}>{this.props.tribe.description}</Text>
+                            <Text style={{fontSize:14}}>{this.props.tribe.description}</Text>
                         </View>
                         <View style={styles.TribeButtons}>
                             <TouchableHighlight style={styles.TribeButton} onPress={() => {console.log('working')}}>
@@ -36,6 +36,7 @@ export default class SingleTribe extends React.Component{
             );
     }
 }
+
 
 const styles = StyleSheet.create({
     container:{
@@ -87,6 +88,7 @@ const styles = StyleSheet.create({
     },
     BannerImage:{
         width:400,
+        height:100,
         position:'absolute',
         top:0,
         left:0,

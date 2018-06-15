@@ -3,6 +3,7 @@ import { PermissionsAndroid, StyleSheet, Text, View, TextInput, TouchableHighlig
 
 //IMPORT CUSTOM COMPONENTS.
 import LoadingAnimation from '../Main/LoadingAnimation'
+import NavigationBar from '../Main/NavigationBar'
 
 export default class Profile extends React.Component{
     static navigationOptions ={
@@ -10,9 +11,10 @@ export default class Profile extends React.Component{
         headerStyle:{
             backgroundColor:"#f8aa23",
             elevation: 0,
-            padding:0
+            padding:0,
+            display:'none'
         },
-        headerTintColor: "#FFF",
+        headerTintColor: "#FFF"
     }
 
     constructor(props){
@@ -97,8 +99,6 @@ export default class Profile extends React.Component{
                 hasLoaded:true
             });
 
-            console.log(this.state.user)
-
             cont.requestCameraPermission();     
         });
     }
@@ -107,9 +107,10 @@ export default class Profile extends React.Component{
         if(this.state.hasLoaded){
             return(
                 <View style={styles.container}>
+                    <NavigationBar navigator={this.props.navigation}/>
                     <View style={styles.ProfileTop}>
-                        <View style={[styles.ProfileImage]}>
-                            <Image style={{width:400,height:200}} source={require('../../assets/defaults/generic-banner.jpg')}/>
+                        <View style={styles.ProfileImage}>
+                            <Image style={{width:40,height:40}} source={require('../../assets/defaults/default-user.png')}/>
                         </View>
                         <View style={styles.UserInformationTitles}>
                             <Text style={styles.UserInfoUsername}>
@@ -118,9 +119,6 @@ export default class Profile extends React.Component{
                             <Text style={styles.UserInfoFullname}>
                                 {this.state.user.firstname} {this.state.user.lastname}
                             </Text>
-                        </View>
-                        <View style={styles.UserInfoJoinDate}>
-                            {this.convertDate(this.state.user.signup)}
                         </View>
                     </View>
                     <View style={styles.ProfileToggler}>
@@ -153,27 +151,22 @@ export default class Profile extends React.Component{
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:"#7b7b7b",
-        padding:10,
-        flex:1
+        backgroundColor:"#141414",
+        padding:5,
+        flex:1,
+        marginTop:20
     },
     ProfileImage:{
 
     },
     ProfileTop:{
-        position:'absolute',
-        top:0,
-        right:0,
-        left:0,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor:"#E5E5E5"
+        flexDirection:'row',
+        marginTop:5
     },
     UserInformationTitles:{
-        padding:10,
-        position:'absolute',
-        top:0,
-        left:0
+        padding:5,
+        marginLeft:5,
+        flex:1
     },
     UserInfoUsername:{
         color:"#FFF",
@@ -191,9 +184,9 @@ const styles = StyleSheet.create({
     },
     ProfileToggler:{
         flexDirection:'row',
-        marginTop:100,
         borderRadius:3,
-        backgroundColor:"#FFF"
+        backgroundColor:"#FFF",
+        marginTop:5
     },
     ProfileToggle:{
         flex:1,
@@ -209,8 +202,7 @@ const styles = StyleSheet.create({
     },
     ToggleView:{
         borderRadius:3,
-        marginTop:10,
-        flex:1,
+        marginTop:5,
         padding:10,
         backgroundColor:"#FFF"
     },
@@ -218,5 +210,11 @@ const styles = StyleSheet.create({
         width:24,
         height:24,
         opacity:.1
+    },
+    ProfileImage:{
+        backgroundColor:"#FFF",
+        borderRadius:3,
+        padding:3,
     }
 });
+

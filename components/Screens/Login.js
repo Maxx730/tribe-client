@@ -51,22 +51,23 @@ export default class LoginFrame extends React.Component {
             }).then(result => {
                 return result.json()
             }).then(data => {
-
                 //HERE WE WANT TO CHECK IF THE LOGIN WAS A SUCCESS OR AND ERROR, IF SUCCESS
                 //WE WANT TO SAVE THE LOGIN ID AND THEN GO INTO NEXT SCREEN, OTHERWISE WE 
                 //WANT TO DISPLAY THE ERROR.
-                if(data.RESULT.TYPE.SUCCESS.MESSAGE == "LOGIN PASSED"){
-                    let cont = this;
-
-                    setTimeout(() => {
-                        cont.setState({
-                            isLoading:false
+                if(data.PASSED){
+                    if(data.RESULT.TYPE.SUCCESS.MESSAGE == "LOGIN PASSED"){
+                        let cont = this;
+    
+                        setTimeout(() => {
+                            cont.setState({
+                                isLoading:false
+                            })
+                        },1000)
+    
+                        this.props.navigation.navigate('Streams',{
+                            userId:data.USER.ID
                         })
-                    },1000)
-
-                    this.props.navigation.navigate('Streams',{
-                        userId:data.USER.ID
-                    })
+                    }
                 }else{
                     let cont = this;
 
@@ -85,6 +86,7 @@ export default class LoginFrame extends React.Component {
             })
         }
     }
+
 
     //IF THERE HAS BEEN AN ERROR SUCH AS SOME FIELDS NOT BEING FILLED OUT WE WANT TO 
     //DISPLAY THE ERROR MESSAGE.
