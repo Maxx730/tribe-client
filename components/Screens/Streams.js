@@ -67,7 +67,7 @@ export default class Streams extends React.Component{
                         <StreamToggler toggle={this.Togglestream.bind(this)} user={this.state.userId} navigator={navigate}/>
                     </View>
                     <View style={styles.StreamView}>
-                        <TribesStream navigator={navigate} user={this.state.userId}/>
+                        { this.state.focusedStream == "tribes" && <TribesStream navigator={navigate} user={this.state.userId}/> }
                     </View>
                 </View>
             )

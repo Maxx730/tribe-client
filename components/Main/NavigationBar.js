@@ -4,37 +4,54 @@ import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image } from 're
 export default class NavigationBar extends React.Component{
 
     componentDidMount(){
-        console.log(this.props)
     }
 
     RenderEdit(){
         return(
-            <TouchableHighlight style={[styles.ButtonRight,styles.NavButton]} onPress={() => {}}>
-                <Text>
-                    Edit
-                </Text>
+            <TouchableHighlight style={[styles.ButtonRight,styles.NavButton,{flex:1,borderLeftWidth:.5,borderLeftColor:"#EBEBEB"}]} onPress={this.props.edit}>
+                <View style={{flexDirection:'row'}}>
+                    <View style={{}}>
+                        <Image style={{width:24,height:24,opacity:.1}} source={require('../../assets/icons/edit-512.png')}/>
+                    </View>
+                </View>
             </TouchableHighlight>
+        )
+    }
+
+    RenderCreation(){
+        return(
+            <View>
+                <Text>
+                    AddButtons
+                </Text>
+            </View>
         )
     }
 
     render(){
         return(
             <View style={styles.container}>
-                <TouchableHighlight style={[styles.ButtonLeft,styles.NavButton]} onPress={() => {this.props.navigator.navigate('Streams')}}>
-                    <Text>
-                        Back
-                    </Text>
+                <TouchableHighlight style={[styles.ButtonLeft,styles.NavButton,{flex:10}]} onPress={() => {this.props.navigator.navigate('Streams')}}>
+                    <Image source={require('../../assets/icons/back-icon.png')} style={{width:24,height:24,opacity:.1}}/>
                 </TouchableHighlight>
-                { this.props.isUser == true && this.RenderEdit() }
+                { 
+                    this.props.isUser == true && this.RenderEdit()
+                }
+                {
+                    this.props.type == "createObject" && this.RenderCreation()
+                }
             </View>
+
         );
     }
+
 }
 
 const styles = StyleSheet.create({
     container:{
         backgroundColor:"#FFF",
         borderRadius:3,
+        flexDirection:'row',
         flexDirection:'row'
     },
     NavButton:{

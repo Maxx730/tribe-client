@@ -12,10 +12,12 @@ export default class StreamToggler extends React.Component{
                     <TouchableHighlight style={[styles.StreamToggle,styles.CenterToggle]} onPress={this.props.toggle.bind(this,"tribes")}>
                         <Image style={styles.ImageIcon} source={require('../../assets/icons/tribes-icon.png')}/>
                     </TouchableHighlight>
-                    <TouchableHighlight style={[styles.StreamToggle,styles.CenterToggle,{borderLeftWidth:0}]} onPress={() => {this.props.navigator('Profile',{userId:this.props.user,isUser:false})}}>
+                    <TouchableHighlight style={[styles.StreamToggle,styles.CenterToggle,{borderLeftWidth:0}]} onPress={() => {this.props.navigator('Profile',{userId:this.props.user,isUser:true})}}>
                         <Image style={styles.ImageIcon} source={require('../../assets/icons/user-icon.png')}/>
                     </TouchableHighlight>
-                    <TouchableHighlight style={[styles.StreamToggle,styles.RightToggle]} onPress={() => {this.props.navigator('Create',{})}}>
+                    <TouchableHighlight style={[styles.StreamToggle,styles.RightToggle]} onPress={() => {this.props.navigator('Create',{
+                        user:this.props.user
+                    })}}>
                         <Image style={styles.ImageIcon} source={require('../../assets/icons/plus-512.png')}/>
                     </TouchableHighlight>
                 </View>

@@ -22,7 +22,34 @@ export default class Profile extends React.Component{
 
         this.state = {
             user:{},
-            hasLoaded:false
+            hasLoaded:false,
+            editing:false
+        }
+    }
+
+    ToggleEditMode(){
+        this.setState({
+            editing:!this.state.editing
+        })
+    }
+
+    RenderEditFields(){
+        if(this.state.editing){
+            return(
+                <View>
+                    <Text>
+                        In Edit Mode
+                    </Text>
+                </View>
+            )
+        }else{
+            return(
+                <View>
+                    <Text>
+                        Not In Edit Mode
+                    </Text>
+                </View>
+            )
         }
     }
 
@@ -99,8 +126,6 @@ export default class Profile extends React.Component{
                 hasLoaded:true
             });
 
-            console.log(this.state);
-
             cont.requestCameraPermission();     
         });
     }
@@ -109,7 +134,7 @@ export default class Profile extends React.Component{
         if(this.state.hasLoaded){
             return(
                 <View style={styles.container}>
-                    <NavigationBar isUser={this.props.navigation.state.params.isUser} navigator={this.props.navigation}/>
+                    <NavigationBar isUser={this.props.navigation.state.params.isUser} navigator={this.props.navigation} edit={this.ToggleEditMode.bind(this)}/>
                     <View style={styles.ProfileTop}>
                         <View style={styles.ProfileImage}>
                             <Image style={{width:40,height:40}} source={require('../../assets/defaults/default-user.png')}/>
@@ -136,7 +161,7 @@ export default class Profile extends React.Component{
                     </View>
                     <View style={styles.ToggleView}>
                         {
-                            this.state.user.bio == "" && <Text>No Description</Text>
+                            this.RenderEditFields()
                         }
                     </View>
             </View>

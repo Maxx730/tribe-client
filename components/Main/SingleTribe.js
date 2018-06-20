@@ -16,7 +16,7 @@ export default class SingleTribe extends React.Component{
                             <Image resizeMode={'cover'} style={styles.BannerImage} source={require('../../assets/defaults/beachfire.jpg')}/>
                         </View>
                         <View style={styles.TribeDescription}>
-                            <Text style={{fontSize:14}}>{this.props.tribe.description}</Text>
+                            <Text style={{fontSize:14}}>{this.props.tribe.description == "" ? "No Description" : this.props.tribe.description}</Text>
                         </View>
                         <View style={styles.TribeButtons}>
                             <TouchableHighlight style={styles.TribeButton} onPress={() => {console.log('working')}}>

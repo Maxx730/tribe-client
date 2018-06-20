@@ -15,13 +15,59 @@ export default class Create extends React.Component{
             newTribe:{
                 title:"",
                 description:"",
+                creator:"",
                 members:[]
-            }
+            },
+            creationError:"",
+            success:false
         }
     }
 
     componentDidMount(){
+        this.setState({
+            newTribe:{
+                title:this.state.newTribe.title,
+                description:this.state.newTribe.description,
+                creator:this.props.navigation.state.params.user,
+                members:[this.props.navigation.state.params.user]
+            }
+        })
+    }
 
+    RequestCreation(){
+        let cont = this;
+
+        if(this.state.newTribe.title != ""){
+            fetch('http://squidswap.com:4000/tribe/create',{
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(this.state.newTribe)
+            }).then(result => {
+                return result.json()
+            }).then(data => {
+                if(data.PASSED){
+                    this.setState({
+                        success:true,
+                        creationError:""
+                    })
+
+                    setTimeout(function(){
+                        cont.props.navigation.navigate('Streams',{
+                            reload:"tribes"
+                        })
+                    },750)
+                }else{
+    
+                }
+            })
+        }else{
+            this.setState({
+                creationError:"Title field cannot be blank."
+            })
+        }
     }
 
     UpdateSearch(){
@@ -43,9 +89,37 @@ export default class Create extends React.Component{
         });
     }
 
+    RenderError(){
+        return(
+            <View style={styles.ErrorMessage}>
+                <Text>
+                    {
+                        this.state.creationError
+                    }
+                </Text>
+            </View>
+        )
+    }
+
+    RenderSuccess(){
+        return(
+            <View style={styles.SuccessMessage}>
+                <Text>
+                    Tribe successfully created!
+                </Text>
+            </View>
+        )
+    }
+
     RenderTribeFields(){
         return(
-            <View>
+            <View style={{flex:1}}>
+                {
+                    this.state.creationError != "" && this.RenderError()
+                }
+                {
+                    this.state.success && this.RenderSuccess()
+                }
                 <View style={styles.TribeFields}>
                     <View style={styles.FieldTitle}>
                         <Text>
@@ -53,9 +127,37 @@ export default class Create extends React.Component{
                         </Text>
                     </View>
                     <View style={styles.FieldsField}>
-                        <TextInput underlineColorAndroid='transparent' placeholder="Title" style={[styles.TribeFieldInput,{marginTop:0}]}/>
-                        <TextInput underlineColorAndroid='transparent' multiline = {true} style={[styles.TribeFieldInput]}/>
+                        <TextInput underlineColorAndroid='transparent' placeholder="Title" style={[styles.TribeFieldInput,{marginTop:0}]} onChangeText={
+                            (value) => {
+                                this.setState({
+                                    newTribe:{
+                                        title:value,
+                                        description:this.state.newTribe.description,
+                                        creator:this.state.newTribe.creator,
+                                        members:this.state.newTribe.members
+                                    }
+                                })
+                            }   
+                        }/>
+                        <TextInput underlineColorAndroid='transparent' multiline = {true} rows={5} style={[styles.TribeFieldInput]} onChangeText={
+                            (value) => {
+                                this.setState({
+                                    newTribe:{
+                                        title:this.state.newTribe.title,
+                                        description:value,
+                                        creator:this.state.newTribe.creator,
+                                        members:this.state.newTribe.members
+                                    }
+                                })
+                            }
+                        }/>
                     </View>
+                    <TouchableHighlight style={styles.TribeBannerImage}>
+                        <Image resizeMode={'cover'} style={{width:'100%',height:100}} source={require('../../assets/defaults/beachfire.jpg')}/>
+                    </TouchableHighlight>
+                    <Text style={{padding:10}}>
+                        Select a cover photo for the new tribe.
+                    </Text>
                 </View>
 
                 <View style={styles.TribeFields}>
@@ -65,13 +167,16 @@ export default class Create extends React.Component{
                         </Text>
                     </View>
                     <View style={styles.FieldsField}>
-                        <TextInput autoCapitalize = 'none' underlineColorAndroid='transparent' placeholder="Username" style={[styles.TribeFieldInput,{marginTop:0}]} onChangeText={(value) => {
-                            this.setState({
-                                searchTerm:value
-                            });
+                        <View style={styles.IconFieldInput}>
+                            <Image style={{width:24,height:24,marginLeft:5,opacity:.1}} source={require('../../assets/icons/zoom-in-512.png')}/>
+                            <TextInput autoCapitalize = 'none' underlineColorAndroid='transparent' placeholder="Username" style={[styles.TribeFieldInput,{marginTop:0,flex:1}]} onChangeText={(value) => {
+                                this.setState({
+                                    searchTerm:value
+                                });
 
-                            this.UpdateSearch();
-                        }}/>
+                                this.UpdateSearch();
+                            }}/>
+                        </View>
 
                         <ScrollView style={styles.UserScroll}>
                             {
@@ -85,6 +190,17 @@ export default class Create extends React.Component{
                             }
                         </ScrollView>
                     </View>
+                </View>
+                <View style={styles.TribeFields}>
+                    <TouchableHighlight style={styles.CreateButton} onPress={
+                        () => {
+                            this.RequestCreation()
+                        }
+                    }>
+                        <Text>
+                            Create
+                        </Text>
+                    </TouchableHighlight>
                 </View>
             </View>
         )
@@ -110,7 +226,7 @@ export default class Create extends React.Component{
     render(){
         return(
             <View style={styles.container}>
-                <NavigationBar navigator={this.props.navigation}/>
+                <NavigationBar type="createObject" navigator={this.props.navigation}/>
                 {
                     this.RenderTribeFields()
                 }
@@ -133,9 +249,9 @@ const styles = StyleSheet.create({
     },
     TribeFieldInput:{
         backgroundColor:"#EBEBEB",
-        padding:10,
         borderRadius:3,
-        marginTop:5
+        padding:10,
+        marginTop:5,
     },
     FieldTitle:{
         borderBottomWidth:.5,
@@ -153,5 +269,31 @@ const styles = StyleSheet.create({
     },
     UserResult:{
         padding:5
+    },
+    CreateButton:{
+        padding:10,
+
+    },
+    IconFieldInput:{
+        flexDirection:'row',
+        backgroundColor:"#EBEBEB",
+        borderRadius:3,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    ErrorMessage:{
+        backgroundColor:"red",
+        borderRadius:3,
+        padding:10,
+        marginTop:5
+    },
+    SuccessMessage:{
+        backgroundColor:"green",
+        borderRadius:3,
+        padding:10,
+        marginTop:5
+    },
+    TribeBannerImage:{
+        marginTop:5
     }
 });

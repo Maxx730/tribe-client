@@ -1,8 +1,9 @@
 import React from 'react';
-import { PermissionsAndroid, StyleSheet, Text, View, TextInput, TouchableHighlight, Image, AsyncStorage} from 'react-native';
+import { PermissionsAndroid, StyleSheet, Text, View, TextInput, TouchableHighlight, Image, AsyncStorage, ScrollView} from 'react-native';
 
 import GlobalSearch from '../Main/GlobalSearch'
 import BottomActionbar from '../Main/BottomActionbar';
+import NavigationBar from '../Main/NavigationBar'
 
 export default class Tribe extends React.Component{
     constructor(props){
@@ -12,7 +13,8 @@ export default class Tribe extends React.Component{
             user:{},
             tribe:{},
             events:{},
-            hasLoaded:false
+            hasLoaded:false,
+            focused:"events"
         }
     }
 
@@ -32,6 +34,7 @@ export default class Tribe extends React.Component{
             shadowColor:'transparent',
             shadowRadius: 0,
             borderWidth:0,
+            display:'none',
             shadowOffset: {
                 height: 0,
             }
@@ -43,14 +46,33 @@ export default class Tribe extends React.Component{
         if(this.state.hasLoaded){
             return(
                 <View style={styles.container}>
+                    <NavigationBar navigator={this.props.navigation}/>
                     <View style={styles.TribeTop}>
                         <GlobalSearch bottomBorder="false"/>
                         <View style={styles.GeneralInfo}>
                             <Image style={styles.BannerImage} source={require('../../assets/defaults/beachfire.jpg')}/>
-                            <Text>{this.state.tribe.title}</Text>
+                            <Text style={{color:'#FFF',position:'absolute',top:7,left:7}}>
+                                {this.state.tribe.title}
+                            </Text>
+                        </View>
+                        <View style={styles.TribeToggles}>
+                            <TouchableHighlight style={[styles.ToggleButton,styles.LeftToggle]}>
+                                <Text>
+                                    Events
+                                </Text>
+                            </TouchableHighlight>
+                            <TouchableHighlight style={[styles.ToggleButton,styles.RightToggle]}>
+                                <Text>
+                                    Details
+                                </Text>
+                            </TouchableHighlight>
+                        </View>
+                        <View>
+                            <ScrollView>
+
+                            </ScrollView>
                         </View>
                     </View>
-                    <BottomActionbar/>
                 </View>
             )
         }else{
@@ -69,10 +91,11 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor:"#141414",
         flex:1,
-        padding:5
+        padding:5,
+        marginTop:20
     },
     TribeTop:{
-
+        marginTop:5
     },
     GeneralInfo:{
         backgroundColor:"#FFF",
@@ -84,5 +107,23 @@ const styles = StyleSheet.create({
         position:'absolute',
         top:0,
         left:0
+    },
+    TribeToggles:{
+        backgroundColor:'#FFF',
+        flexDirection:'row',
+        borderBottomLeftRadius:3,
+        borderBottomRightRadius:3
+    },
+    ToggleButton:{
+        flex:1,
+        padding:10
+    },
+    RightToggle:{
+        borderLeftWidth:.5,
+        borderLeftColor:'#EBEBEB',
+        borderBottomRightRadius:3
+    },
+    LeftToggle:{
+        borderBottomLeftRadius:3
     }
 })
