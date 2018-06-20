@@ -226,7 +226,7 @@ export default class Create extends React.Component{
     render(){
         return(
             <View style={styles.container}>
-                <NavigationBar type="createObject" navigator={this.props.navigation}/>
+                <NavigationBar navigator={this.props.navigation}/>
                 {
                     this.RenderTribeFields()
                 }

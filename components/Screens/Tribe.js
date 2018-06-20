@@ -46,7 +46,7 @@ export default class Tribe extends React.Component{
         if(this.state.hasLoaded){
             return(
                 <View style={styles.container}>
-                    <NavigationBar navigator={this.props.navigation}/>
+                    <NavigationBar  type="createObject" navigator={this.props.navigation}/>
                     <View style={styles.TribeTop}>
                         <GlobalSearch bottomBorder="false"/>
                         <View style={styles.GeneralInfo}>

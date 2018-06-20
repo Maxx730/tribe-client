@@ -18,12 +18,12 @@ export default class NavigationBar extends React.Component{
         )
     }
 
-    RenderCreation(){
+    RenderTribeCreate(){
         return(
-            <View>
-                <Text>
-                    AddButtons
-                </Text>
+            <View style={{}}>
+                <TouchableHighlight style={{borderLeftWidth:.5,borderLeftColor:"#EBEBEB",padding:10}}>
+                    <Image style={{width:24,height:24,opacity:.1}} source={require('../../assets/icons/square-add.png')}/>
+                </TouchableHighlight>
             </View>
         )
     }
@@ -38,7 +38,7 @@ export default class NavigationBar extends React.Component{
                     this.props.isUser == true && this.RenderEdit()
                 }
                 {
-                    this.props.type == "createObject" && this.RenderCreation()
+                    this.props.type == "createObject" && this.RenderTribeCreate()
                 }
             </View>
 
@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor:"#FFF",
         borderRadius:3,
-        flexDirection:'row',
         flexDirection:'row'
     },
     NavButton:{
